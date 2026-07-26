@@ -405,7 +405,12 @@
 
       stats.textContent = `${username} owns ${totalCardsOwned} total cards (${uniqueOwnedCount}/${totalUniqueInGame} unique)`;
 
-      Object.keys(cardCounts).forEach(cardId => {
+      // Sort the card IDs alphabetically/numerically (e.g., card_001, card_002, etc.)
+      const sortedCardIds = Object.keys(cardCounts).sort((a, b) => {
+        return a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' });
+      });
+
+      sortedCardIds.forEach(cardId => {
         const cardObj = masterCards[cardId];
         if (!cardObj) return;
 
@@ -426,11 +431,7 @@
         grid.appendChild(cardEl);
       });
     }
-
-    document.getElementById('user-input').addEventListener('input', (e) => {
-      renderUserCollection(e.target.value);
-    });
-
+    
     init();
   </script>
 </body>
