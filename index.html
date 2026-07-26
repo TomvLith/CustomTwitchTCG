@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Stream TCG Collection Viewer</title>
+  <style>
+    :root {
+      --bg-color: #0f0f13;
+      --card-bg: #1a1a24;
+      --accent-color: #9146FF;
+      --text-color: #f0f0f5;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    header {
+      width: 100%;
+      padding: 40px 20px 20px 20px;
+      text-align: center;
+      background: linear-gradient(180deg, rgba(145, 70, 255, 0.15) 0%, rgba(15, 15, 19, 0) 100%);
+    }
+
+    h1 {
+      margin: 0 0 10px 0;
+      font-size: 2.5rem;
+      letter-spacing: 1px;
+    }
+
+    .search-container {
+      margin: 20px auto 0 auto;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      max-width: 500px;
+      padding: 0 20px;
+      box-sizing: border-box;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 12px 18px;
+      font-size: 1rem;
+      border-radius: 25px;
+      border: 2px solid #2a2a3a;
+      background: #14141d;
+      color: #fff;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input[type="text"]:focus {
+      border-color: var(--accent-color);
+    }
+
+    .stats-bar {
+      margin: 20px 0 10px 0;
+      font-size: 1.1rem;
+      color: #a0a0b0;
+    }
+
+    /* Top Collectors List */
+    .leaderboard-container {
+      margin-top: 25px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .leaderboard-title {
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #808095;
+      font-weight: bold;
+    }
+
+    .leaderboard-chips {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      max-width: 800px;
+    }
+
+    .user-chip {
+      background: #1e1e2d;
+      border: 1px solid #3a3a50;
+      color: var(--text-color);
+      padding: 8px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .user-chip:hover {
+      background: var(--accent-color);
+      border-color: var(--accent-color);
+      transform: translateY(-2px);
+    }
+
+    .user-chip .badge {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 2px 6px;
+      border-radius: 10px;
+      font-size: 0.75rem;
+    }
+
+    /* Grid Display */
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 25px;
+      width: 90%;
+      max-width: 1200px;
+      padding: 20px 0 60px 0;
+    }
+
+    .card-item {
+      background: var(--card-bg);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #2a2a3c;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 10px;
+    }
+
+    .card-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 24px rgba(145, 70, 255, 0.2);
+      border-color: var(--accent-color);
+    }
+
+    /* Dynamic Card Template Wrapper for Index Grid */
+    .card-template-wrapper {
+      position: relative;
+      width: 240px;
+      height: 337.5px;
+      background-size: cover;
+      background-position: center;
+      border-radius: 12px;
+      overflow: hidden;
+      box-sizing: border-box;
+      margin: 15px auto 10px auto;
+    }
+
+    .card-dynamic-title {
+      position: absolute;
+      top: 13.5px;
+      left: 18px;
+      font-size: 15px;
+      font-weight: bold;
+      color: #000;
+    }
+
+    .card-dynamic-image-container {
+      position: absolute;
+      top: 35px;
+      left: 9px;
+      width: 218px;
+      height: 143px;
+      background: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      border: 2px solid #0b1c4c;
+    }
+
+    .card-dynamic-image {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .card-dynamic-desc {
+      position: absolute;
+      top: 198px;
+      left: 21px;
+      width: 198px;
+      height: 82px;
+      font-size: 13px;
+      color: #222;
+      line-height: 1.3;
+      overflow: hidden;
+    }
+
+    .card-dynamic-id {
+      position: absolute;
+      bottom: 11px;
+      right: 18px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #ffffff;
+    }
+
+    .card-details {
+      padding: 0 15px;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .card-count {
+      display: inline-block;
+      align-self: flex-start;
+      background: var(--accent-color);
+      color: white;
+      font-size: 0.8rem;
+      font-weight: bold;
+      padding: 3px 8px;
+      border-radius: 12px;
+    }
+
+    .empty-state {
+      text-align: center;
+      color: #606075;
+      font-size: 1.2rem;
+      margin-top: 50px;
+      grid-column: 1 / -1;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Stream TCG Binder</h1>
+    <p>Search your Twitch username to inspect your collection!</p>
+    
+    <div class="search-container">
+      <input type="text" id="user-input" placeholder="Enter Twitch username..." />
+    </div>
+
+    <div class="leaderboard-container" id="leaderboard-box" style="display: none;">
+      <span class="leaderboard-title">🏆 Top Collectors (Click to View)</span>
+      <div class="leaderboard-chips" id="leaderboard-chips"></div>
+    </div>
+
+    <div class="stats-bar" id="stats">Type a username above to begin.</div>
+  </header>
+
+  <main class="grid-container" id="grid"></main>
+
+  <script>
+    let masterCards = {};
+    let collectionsData = [];
+
+    function createCardElement(cardData) {
+      const formattedId = cardData.id.replace('card_', '#');
+      const cardWrapper = document.createElement('div');
+      cardWrapper.className = 'card-template-wrapper';
+
+      const rarityMap = {
+        "common": "images/cCard.png",
+        "uncommon": "images/uCard.png",
+        "rare": "images/rCard.png",
+        "legendary": "images/lCard.png",
+        "secret": "images/sCard.png"
+      };
+
+      const rarityKey = (cardData.rarity || "common").toLowerCase();
+      const templateBg = rarityMap[rarityKey] || rarityMap["common"];
+      
+      cardWrapper.style.backgroundImage = `url('${templateBg}')`;
+
+      cardWrapper.innerHTML = `
+        <div class="card-dynamic-title">${cardData.name}</div>
+        <div class="card-dynamic-image-container">
+          <img class="card-dynamic-image" src="${cardData.image}" alt="${cardData.name}" />
+        </div>
+        <div class="card-dynamic-desc">${cardData.description}</div>
+        <div class="card-dynamic-id">${formattedId}</div>
+      `;
+
+      return cardWrapper;
+    }
+
+    async function init() {
+      try {
+        const [cardsResp, collectionsResp] = await Promise.all([
+          fetch('cards.json'),
+          fetch('collections.json')
+        ]);
+
+        if (!cardsResp.ok || !collectionsResp.ok) {
+          throw new Error('HTTP error loading JSON files');
+        }
+
+        const rawCards = await cardsResp.json();
+        collectionsData = await collectionsResp.json();
+
+        rawCards.forEach(c => {
+          masterCards[c.id] = c;
+        });
+
+        renderLeaderboard();
+
+      } catch (err) {
+        console.error("Error loading TCG data:", err);
+        document.getElementById('stats').innerHTML = 
+          `<span style="color: #ff5555;">Failed to load data. Make sure you are using a local server (e.g. Live Server in VS Code) and not opening index.html directly via file://</span>`;
+      }
+    }
+
+    function renderLeaderboard() {
+      const container = document.getElementById('leaderboard-box');
+      const chipsArea = document.getElementById('leaderboard-chips');
+      
+      if (!collectionsData.length) return;
+
+      const userStats = {};
+
+      collectionsData.forEach(entry => {
+        if (!entry.username || !Array.isArray(entry.cardIds)) return;
+        
+        const key = entry.username.toLowerCase();
+        if (!userStats[key]) {
+          userStats[key] = { displayName: entry.username, uniqueCards: new Set() };
+        }
+        
+        entry.cardIds.forEach(id => userStats[key].uniqueCards.add(id));
+      });
+
+      const sortedUsers = Object.values(userStats)
+        .sort((a, b) => b.uniqueCards.size - a.uniqueCards.size)
+        .slice(0, 8);
+
+      if (sortedUsers.length === 0) return;
+
+      chipsArea.innerHTML = '';
+      sortedUsers.forEach(u => {
+        const chip = document.createElement('button');
+        chip.className = 'user-chip';
+        chip.innerHTML = `${u.displayName} <span class="badge">${u.uniqueCards.size}/${Object.keys(masterCards).length}</span>`;
+        
+        chip.onclick = () => {
+          const input = document.getElementById('user-input');
+          input.value = u.displayName;
+          renderUserCollection(u.displayName);
+        };
+
+        chipsArea.appendChild(chip);
+      });
+
+      container.style.display = 'flex';
+    }
+
+    function renderUserCollection(username) {
+      const grid = document.getElementById('grid');
+      const stats = document.getElementById('stats');
+      grid.innerHTML = '';
+
+      if (!username.trim()) {
+        stats.textContent = "Type a username above to begin.";
+        return;
+      }
+
+      const cleanUser = username.trim().toLowerCase();
+
+      const userEntries = collectionsData.filter(entry => 
+        entry.username && entry.username.toLowerCase() === cleanUser
+      );
+
+      const cardCounts = {};
+      let totalCardsOwned = 0;
+
+      userEntries.forEach(entry => {
+        if (Array.isArray(entry.cardIds)) {
+          entry.cardIds.forEach(id => {
+            cardCounts[id] = (cardCounts[id] || 0) + 1;
+            totalCardsOwned++;
+          });
+        }
+      });
+
+      const uniqueOwnedCount = Object.keys(cardCounts).length;
+      const totalUniqueInGame = Object.keys(masterCards).length;
+
+      if (totalCardsOwned === 0) {
+        grid.innerHTML = `<div class="empty-state">No cards found for user "${username}".</div>`;
+        stats.textContent = `0 cards collected`;
+        return;
+      }
+
+      stats.textContent = `${username} owns ${totalCardsOwned} total cards (${uniqueOwnedCount}/${totalUniqueInGame} unique)`;
+
+      Object.keys(cardCounts).forEach(cardId => {
+        const cardObj = masterCards[cardId];
+        if (!cardObj) return;
+
+        const count = cardCounts[cardId];
+
+        const cardEl = document.createElement('div');
+        cardEl.className = 'card-item';
+        
+        const renderedCard = createCardElement(cardObj);
+
+        cardEl.innerHTML = `
+          <div class="card-details">
+            <span class="card-count">x${count}</span>
+          </div>
+        `;
+        
+        cardEl.insertBefore(renderedCard, cardEl.firstChild);
+        grid.appendChild(cardEl);
+      });
+    }
+
+    document.getElementById('user-input').addEventListener('input', (e) => {
+      renderUserCollection(e.target.value);
+    });
+
+    init();
+  </script>
+</body>
+</html>

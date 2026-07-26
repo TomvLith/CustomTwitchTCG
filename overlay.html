@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TCG Pack Opening Overlay</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: transparent;
+    }
+
+    #overlay-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    #overlay-container.active {
+      opacity: 1;
+    }
+
+    /* Redeemed User Header */
+    #user-badge {
+      position: absolute;
+      top: 80px;
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      padding: 12px 30px;
+      border-radius: 25px;
+      font-size: 28px;
+      font-weight: bold;
+      border: 2px solid #9146FF;
+      box-shadow: 0 0 15px rgba(145, 70, 255, 0.6);
+    }
+
+    /* Pack Animation Layer */
+    #pack-animation-container {
+      position: absolute;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .pack-video {
+      width: 400px;
+      height: auto;
+    }
+
+    /* Card Stack Area */
+    #card-stage {
+      position: relative;
+      width: 320px;
+      height: 450px;
+      z-index: 5;
+    }
+
+    /* Dynamic Card Template Wrapper */
+    .card {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 320px;
+      height: 450px;
+      background-size: cover;
+      background-position: center;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease;
+      user-select: none;
+      box-sizing: border-box;
+      overflow: hidden;
+      z-index: 10;
+    }
+
+    /* Card Layout Elements */
+    .card-dynamic-title {
+      position: absolute;
+      top: 18px;
+      left: 24px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #000;
+    }
+
+    .card-dynamic-image-container {
+      position: absolute;
+      top: 50px;
+      left: 12px;
+      width: 293px;
+      height: 187px;
+      background: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      border: 2px solid #0b1c4c;
+    }
+
+    .card-dynamic-image {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .card-dynamic-desc {
+      position: absolute;
+      top: 265px;
+      left: 24px;
+      width: 272px;
+      height: 110px;
+      font-size: 18px;
+      color: #222;
+      line-height: 1.3;
+      overflow: hidden;
+    }
+
+    .card-dynamic-id {
+      position: absolute;
+      bottom: 15px;
+      right: 25px;
+      font-size: 30px;
+      font-weight: bold;
+      color: #ffffff;
+    }
+    
+    /* Sliding animation class */
+    .slide-out {
+      transform: translateX(450px) rotate(15deg) !important;
+      opacity: 0 !important;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="overlay-container">
+    <div id="user-badge">Opening pack for: <span id="username">Viewer</span></div>
+    
+    <div id="pack-animation-container">
+        <img id="pack-gif" class="pack-video" src="images/PackOpening.webp" style="display: none;" alt="Opening Pack..." />
+    </div>
+
+    <div id="card-stage"></div>
+  </div>
+
+<script>
+  const WS_URL = "ws://127.0.0.1:8080/";
+  let socket;
+  let masterCards = {};
+
+  const overlayContainer = document.getElementById('overlay-container');
+  const userBadge = document.getElementById('username');
+  const cardStage = document.getElementById('card-stage');
+  const packGif = document.getElementById('pack-gif');
+
+  // Timing Settings (in milliseconds)
+  const CARD_APPEAR_DELAY_MS = 2100;
+  const GIF_DURATION_MS = 3000; 
+  const CARD_DISPLAY_MS = 4500; 
+  const SLIDE_ANIMATION_MS = 600; 
+
+  // Load cards.json on overlay startup for fallback rarity reference
+  fetch('cards.json')
+    .then(response => response.json())
+    .then(data => {
+      data.forEach(c => {
+        masterCards[c.id] = c;
+      });
+      console.log("Master cards loaded for overlay fallback.");
+    })
+    .catch(err => console.error("Could not load cards.json in overlay:", err));
+
+  function createCardElement(cardData) {
+    const formattedId = cardData.id.replace('card_', '#');
+    const cardEl = document.createElement('div');
+    cardEl.className = 'card';
+
+    // Map rarity to its specific card design file
+    const rarityMap = {
+      "common": "images/cCard.png",
+      "uncommon": "images/uCard.png",
+      "rare": "images/rCard.png",
+      "legendary": "images/lCard.png",
+      "secret": "images/sCard.png"
+    };
+
+    // Check cardData rarity first; if missing, look it up in masterCards using the id
+    let rawRarity = cardData.rarity;
+    if (!rawRarity && masterCards[cardData.id]) {
+      rawRarity = masterCards[cardData.id].rarity;
+    }
+
+    const rarityKey = rawRarity ? rawRarity.toLowerCase() : "common";
+    const templateBg = rarityMap[rarityKey] || rarityMap["common"];
+    
+    cardEl.style.backgroundImage = `url('${templateBg}')`;
+
+    cardEl.innerHTML = `
+      <div class="card-dynamic-title">${cardData.name}</div>
+      <div class="card-dynamic-image-container">
+        <img class="card-dynamic-image" src="${cardData.image}" alt="${cardData.name}" />
+      </div>
+      <div class="card-dynamic-desc">${cardData.description}</div>
+      <div class="card-dynamic-id">${formattedId}</div>
+    `;
+
+    return cardEl;
+  }
+
+  function connectWebSocket() {
+    socket = new WebSocket(WS_URL);
+
+    socket.onopen = () => {
+      console.log("Connected to Streamer.bot WebSocket");
+      
+      const subscribeMsg = {
+        request: "Subscribe",
+        id: "tcg-overlay",
+        events: {
+          General: ["Custom"]
+        }
+      };
+      socket.send(JSON.stringify(subscribeMsg));
+    };
+
+    socket.onmessage = (event) => {
+      console.log("Raw WS Message Received:", event.data);
+
+      try {
+        let data = JSON.parse(event.data);
+
+        if (typeof data === "string") {
+          data = JSON.parse(data);
+        }
+
+        if (data.data) {
+          if (typeof data.data === "string") {
+            try { data = JSON.parse(data.data); } catch(e) {}
+          } else {
+            data = data.data;
+          }
+        }
+
+        console.log("Parsed Data Object:", data);
+
+        if (data && data.event_type === "pack_opened") {
+          console.log("Triggering Pack Opening for:", data.user);
+          triggerPackOpening(data.user, data.cards);
+        }
+      } catch (err) {
+        console.error("Error parsing WS message:", err);
+      }
+    };
+
+    socket.onclose = () => {
+      console.log("WebSocket connection closed. Retrying in 3s...");
+      setTimeout(connectWebSocket, 3000);
+    };
+  }
+
+  function triggerPackOpening(username, cards) {
+    userBadge.textContent = username;
+    
+    cardStage.style.display = 'none';
+    cardStage.innerHTML = ''; 
+    
+    overlayContainer.classList.add('active');
+
+    packGif.src = `images/PackOpening.webp?t=${Date.now()}`;
+    packGif.style.display = 'block';
+
+    setTimeout(() => {
+      packGif.style.display = 'none';
+    }, GIF_DURATION_MS);
+
+    setTimeout(() => {
+      cardStage.style.display = 'block';
+      
+      const cardElements = [];
+
+      cards.forEach((card, index) => {
+        const cardEl = createCardElement(card);
+        
+        cardEl.style.transform = `translateY(${index * -4}px) scale(${1 - index * 0.02})`;
+        cardEl.style.zIndex = cards.length - index;
+
+        cardStage.appendChild(cardEl);
+        cardElements.push(cardEl);
+      });
+
+      startAutoSlideSequence(cardElements);
+
+    }, CARD_APPEAR_DELAY_MS);
+  }
+
+  function startAutoSlideSequence(cardElements) {
+    let currentIndex = 0;
+
+    function showNextCard() {
+      if (currentIndex < cardElements.length) {
+        setTimeout(() => {
+          cardElements[currentIndex].classList.add('slide-out');
+          currentIndex++;
+          setTimeout(showNextCard, SLIDE_ANIMATION_MS);
+        }, CARD_DISPLAY_MS);
+      } else {
+        setTimeout(() => {
+          overlayContainer.classList.remove('active');
+          cardStage.style.display = 'none';
+        }, 300);
+      }
+    }
+
+    showNextCard();
+  }
+
+  connectWebSocket();
+</script>
+</body>
+</html>

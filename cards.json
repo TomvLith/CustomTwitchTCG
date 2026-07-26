@@ -1,0 +1,1282 @@
+[
+  {
+    "id": "card_001",
+    "name": "OBS",
+    "description": "The streaming software Tom uses to go live.",
+    "image": "images/OBS.jpg",
+    "weight": 550,
+    "rarity": "common"
+  },
+  {
+    "id": "card_002",
+    "name": "Twitch",
+    "description": "The platform Tom uses to share his livestreams.",
+    "image": "images/Twitch.jpg",
+    "weight": 550,
+    "rarity": "common"
+  },
+    {
+    "id": "card_003",
+    "name": "Discord",
+    "description": "Where to reach out to Tom and find him when he's not on stream.",
+    "image": "images/disc.avif",
+    "weight": 550,
+    "rarity": "common"
+    },
+      {
+    "id": "card_004",
+    "name": "Youtube",
+    "description": "The platform where my shorts content does well and I occasionaly upload long form content.",
+    "image": "images/Youtube.jpg",
+    "weight": 550,
+    "rarity": "common"
+  },
+    {
+    "id": "card_005",
+    "name": "Tiktok",
+    "description": "The platform where my shorts form content doesn't do that well.",
+    "image": "images/tiktok.png",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_006",
+    "name": "Spotify",
+    "description": "Tom could not live without music. I play music on stream from here too.",
+    "image": "images/spotify.png",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_007",
+    "name": "Logitech",
+    "description": "Nearly all of my periphirals are from here (Mic, Cam, Keyboard, Headset and Mouse).",
+    "image": "images/logitech.png",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_008",
+    "name": "RTX 5060 Ti 16GB",
+    "description": "The GPU Tom uses.",
+    "image": "images/GPU.jpg",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_009",
+    "name": "Ryzen 7 7800X3D",
+    "description": "The CPU Tom uses.",
+    "image": "images/CPU.jpg",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_010",
+    "name": "Corsair Vengeance 32GB 6000Mhz",
+    "description": "The RAM Tom uses.",
+    "image": "images/RAM.avif",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_011",
+    "name": "Nvidia",
+    "description": "The GPU manufacturer Tom has chosen.",
+    "image": "images/nvidia.jpg",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_012",
+    "name": "MSI",
+    "description": "The brand Tom's monitors are from.",
+    "image": "images/msi.png",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_013",
+    "name": "Capcut",
+    "description": "The sofware Tom uses to edit videos (if he ever feels like it).",
+    "image": "images/capcut.webp",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_014",
+    "name": "Pixilart",
+    "description": "Website Tom uses to draw most of the art for this TCG. He also made his sub/bitbadges here and a bunch of emotes.",
+    "image": "images/pixilart.webp",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_015",
+    "name": "Wallpaper Engine",
+    "description": "Application Tom uses to get his beloved Ace Attorney wallpapers.",
+    "image": "images/wallpaper.jpg",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_016",
+    "name": "Steam",
+    "description": "Where Tom gets most of my paid games from.",
+    "image": "images/steam.jpg",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_017",
+    "name": "Epic Games",
+    "description": "Where Tom downloaded Rocket League and Fortnite.",
+    "image": "images/epicgames.png",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_018",
+    "name": "Riot",
+    "description": "Where Tom downloaded Valorant.",
+    "image": "images/riot.webp",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_019",
+    "name": "EA",
+    "description": "Where Tom used to download FIFA.",
+    "image": "images/ea.png",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_020",
+    "name": "Battle.net",
+    "description": "Where Tom downloaded Overwatch.",
+    "image": "images/battle.png",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_021",
+    "name": "Rocket League",
+    "description": "Hittin' Balls is usually Tom's title while playing this game. Tom's peak rank is Grandchamp 1.",
+    "image": "images/rl.jpg",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_022",
+    "name": "Fortnite",
+    "description": "The first game Tom ever streamed. Tom used to love going for sniper kills on a hoverboard.",
+    "image": "images/fortnite.jpg",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_023",
+    "name": "Xbox",
+    "description": "The console Tom started streaming from.",
+    "image": "images/xbox.jpg",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_024",
+    "name": "Valorant",
+    "description": "Tom plays random guns in swiftplay on this game a lot. Tom also is a true Brimstone main named BRIMJOB.",
+    "image": "images/valorant.webp",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_025",
+    "name": "FIFA",
+    "description": "Tom used to play this game A LOT. Tom used to be very good but is happy he retired due to raging.",
+    "image": "images/fifa.png",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_026",
+    "name": "Overwatch",
+    "description": "Tom's very first xbox game. peaked Top 500 in 2 different modes.",
+    "image": "images/overwatch.png",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_027",
+    "name": "Ace Attorney",
+    "description": "OBJECTION! Tom's favorite game of all time.",
+    "image": "images/attorney.png",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_028",
+    "name": "Apex Legends",
+    "description": "Tom loves Mirage on this game, but he's been maining Fuse recently.",
+    "image": "images/apex.jpg",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_029",
+    "name": "Bread & Fred",
+    "description": "Ragebaited terribly by my little brother this one time... do NOT recommend (fun game tho).",
+    "image": "images/bread.avif",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_030",
+    "name": "Content Warning",
+    "description": "One of the only horror games I can handle. It is very funny.",
+    "image": "images/content.avif",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_031",
+    "name": "Counter-Strike 2",
+    "description": "Gambler's dream disguised as a shooter game. Can be pretty fun though.",
+    "image": "images/cs.jpg",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_032",
+    "name": "A Dance of Fire and Ice",
+    "description": "Probably the coolest rhythm game I have played.",
+    "image": "images/dance.jpg",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_033",
+    "name": "Dead as Disco",
+    "description": "Very cool rhythm based fighting game. Though for me its mostly a fighting game with timings sometimes",
+    "image": "images/disco.jpg",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_034",
+    "name": "Gamble with your Friends",
+    "description": "After playing this game I have seriously considered selling my friends.",
+    "image": "images/gamble.jpg",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_035",
+    "name": "Gang Beasts",
+    "description": "Very funny party game. Knock a friend out and throw them into the fire",
+    "image": "images/gang.jpg",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_036",
+    "name": "Garry's Mod",
+    "description": "Prophunt very funny. Love to find ways to break the game",
+    "image": "images/gmod.png",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_037",
+    "name": "Geometry Dash",
+    "description": "I beat 2 demons on this game. Probably fluked it as I don't think I'm very good.",
+    "image": "images/gd.png",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_038",
+    "name": "Golf It!",
+    "description": "Did a challenge map once. I won, suck on that other competitors",
+    "image": "images/golf.jpg",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_039",
+    "name": "The Henry Stickmin Collection",
+    "description": "Love this kinda humor. Give me more reccomendations.",
+    "image": "images/henry.jpg",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_040",
+    "name": "High on Life",
+    "description": "Rick and Morty, but you're getting kidnapped to be made into drugs.",
+    "image": "images/high.jpg",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_041",
+    "name": "Hollow Knight",
+    "description": "I am not good enough at games like these. Never actually finished it...",
+    "image": "images/hollow.jpg",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_042",
+    "name": "Jackbox Party Packs",
+    "description": "Love hosting these. Played these on my birthday IRL too.",
+    "image": "images/jackbox.jpg",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_043",
+    "name": "Kindergarten",
+    "description": "Love this kinda humor, cant wait for the next game.",
+    "image": "images/kinder.jpg",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_044",
+    "name": "Lethal Company",
+    "description": "Too scary for me. I am weak I know...",
+    "image": "images/lethal.jpg",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_045",
+    "name": "LOCKDOWN Protocol",
+    "description": "Among us, but high effort.",
+    "image": "images/lockdown.jpg",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_046",
+    "name": "Mage Arena",
+    "description": "FIREBALL. DIE AHhAhahhah.",
+    "image": "images/mage.jpg",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_047",
+    "name": "Marbles on Stream",
+    "description": "Used to be obsessed with this game. Very cool and fun stream game.",
+    "image": "images/marbles.jpg",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_048",
+    "name": "Marvel Rivals",
+    "description": "Tried it not for me. I'm sure it's atleast half decent.",
+    "image": "images/marvel.png",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_049",
+    "name": "Meccha Chameleon",
+    "description": "I can't draw well, but I turn into an amazing artist in this game.",
+    "image": "images/meccha.jpg",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_050",
+    "name": "MOUSE: P.I. For Hire",
+    "description": "Very cool DOOM like boomer shooter with mice, sadly misses the detective aspect for me.",
+    "image": "images/mouse.jpg",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_051",
+    "name": "My Singing Monsters",
+    "description": "BAM DOO, BAM BAM DOO-A.",
+    "image": "images/singing.png",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_052",
+    "name": "Ori and the Blind Forest",
+    "description": "Wonderful game art and audio wise. Very cool platformer.",
+    "image": "images/ori.jpg",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_053",
+    "name": "Palworld",
+    "description": "Ark and Pokemon combined into a game. Pretty fun at times",
+    "image": "images/palworld.jpg",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_054",
+    "name": "PANICORE",
+    "description": "Too scary, if you make noise in game or outside of it the monsters come to you.",
+    "image": "images/panic.jpg",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_055",
+    "name": "PEAK",
+    "description": "Very fun game with friends. Truebeasts favorite long form video is on this game starring me of course.",
+    "image": "images/peak.webp",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_056",
+    "name": "Pizza Tower",
+    "description": "Amazing platformer. One of my favorite soundtracks of all time.",
+    "image": "images/pizza.jpg",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_057",
+    "name": "Portal",
+    "description": "The cake was a lie. First long form video I ever made.",
+    "image": "images/portal.jpg",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_058",
+    "name": "Prophunter",
+    "description": "Very funny prophunter game. We completely broke this game.",
+    "image": "images/prop.jpg",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_059",
+    "name": "REMATCH",
+    "description": "Amazing football game. Got the highest rank in season 1 after which I haven't played much.",
+    "image": "images/rematch.jpg",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_060",
+    "name": "R.E.P.O.",
+    "description": "I can play this game without being scared. I get incredibly stupid every time I launch this game though.",
+    "image": "images/repo.jpg",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_061",
+    "name": "Slay the Spire 2",
+    "description": "Probably one of the best roguelite's i've ever played. Love the card building aspect.",
+    "image": "images/sts2.jpg",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_062",
+    "name": "Sneak Out",
+    "description": "Very funny penguin escape game.",
+    "image": "images/sneak.jpg",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_063",
+    "name": "Stick Fight: The Game",
+    "description": "probably one of the funniest competitive games to play with friends locally or online.",
+    "image": "images/stick.jpg",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_064",
+    "name": "Supermarket Together",
+    "description": "First long form video where I co-starred in another content creators video.",
+    "image": "images/supermarket.jpg",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_065",
+    "name": "TCG Card Shop Simulator",
+    "description": "Very cool game, because gambling with cards is very fun and now we have one of our own.",
+    "image": "images/tcgshop.jpg",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_066",
+    "name": "Team Fortress 2",
+    "description": "very funny teamfight shooter game which I am incredibly bad at.",
+    "image": "images/tf2.jpg",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_067",
+    "name": "67",
+    "description": "HAhahhahHAHAHHHAhhhhahHAha 67 ahhahahhh xD LOL.",
+    "image": "images/67.jpg",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_068",
+    "name": "Sad card",
+    "description": "Probably the card in the worst position of the entire TCG.",
+    "image": "images/sad.png",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_069",
+    "name": "69",
+    "description": "Content Unavailable.",
+    "image": "images/unavail.jpg",
+    "weight": 550,
+    "rarity": "common"
+  },
+      {
+    "id": "card_070",
+    "name": "The Witcher 3: Wild Hunt",
+    "description": "First game anybody ever gifted me on Steam.",
+    "image": "images/witcher.avif",
+    "weight": 550,
+    "rarity": "common"
+  },
+        {
+    "id": "card_071",
+    "name": "AnetkaSpagetka98",
+    "description": "Czech Ginger (soulless) friend of mine.",
+    "image": "images/pfp.jpg",
+    "weight": 300,
+    "rarity": "uncommon"
+  },
+  {
+    "id": "card_072",
+    "name": "Aster_RL",
+    "description": "Retired RL pro, Married man now.",
+    "image": "images/pfp.jpg",
+    "weight": 300,
+    "rarity": "uncommon"
+  },
+  {
+    "id": "card_073",
+    "name": "CsBroke",
+    "description": "Someone who used to Queue valorant with me and kinda carry me.",
+    "image": "images/pfp.jpg",
+    "weight": 300,
+    "rarity": "uncommon"
+  },
+  {
+    "id": "card_074",
+    "name": "Dandaloria",
+    "description": "Is it pink? Her hair sure is. Also made my scenes, thank her.",
+    "image": "images/pfp.jpg",
+    "weight": 300,
+    "rarity": "uncommon"
+  },
+  {
+    "id": "card_075",
+    "name": "Duckvinduck",
+    "description": "Very cool Danish person who is one of the biggest reasons I pulled through with this TCG.",
+    "image": "images/pfp.jpg",
+    "weight": 300,
+    "rarity": "uncommon"
+  },
+  {
+    "id": "card_076",
+    "name": "GiphsxD",
+    "description": "One of my favorite people of all time. Now a college football player.",
+    "image": "images/pfp.jpg",
+    "weight": 300,
+    "rarity": "uncommon"
+  },
+  {
+    "id": "card_077",
+    "name": "InfamousDbub",
+    "description": "One of the coolest streamers I was in during the early rS days. Hosted a lot of custom tournaments.",
+    "image": "images/pfp.jpg",
+    "weight": 300,
+    "rarity": "uncommon"
+  },
+  {
+    "id": "card_078",
+    "name": "VIP IssaHabibiTing",
+    "description": "Very cool person who Streams herself and is a good reliable friend.",
+    "image": "images/pfp.jpg",
+    "weight": 300,
+    "rarity": "uncommon"
+  },
+  {
+    "id": "card_079",
+    "name": "Khada_iv",
+    "description": "One of the biggest Valorant supporters I had. Very wise and calm.",
+    "image": "images/pfp.jpg",
+    "weight": 300,
+    "rarity": "uncommon"
+  },
+  {
+    "id": "card_080",
+    "name": "Ki4w101",
+    "description": "ngl forgot who he is. When he comes back once I'll update his info.",
+    "image": "images/pfp.jpg",
+    "weight": 300,
+    "rarity": "uncommon"
+  },
+  {
+    "id": "card_081",
+    "name": "Marsquito",
+    "description": "Valorant supporter who also stream herself.",
+    "image": "images/pfp.jpg",
+    "weight": 300,
+    "rarity": "uncommon"
+  },
+  {
+    "id": "card_082",
+    "name": "MaskedOra",
+    "description": "Hayden is one of my earliest supporters. In a way we grew up together.",
+    "image": "images/pfp.jpg",
+    "weight": 300,
+    "rarity": "uncommon"
+  },
+  {
+    "id": "card_083",
+    "name": "MaxvlonTwitch",
+    "description": "Younger Brother #1. Gymrat. Smart, Very cool.",
+    "image": "images/pfp.jpg",
+    "weight": 300,
+    "rarity": "uncommon"
+  },
+  {
+    "id": "card_084",
+    "name": "Mikoo48",
+    "description": "Mikoo is a really good Geometry Dash player who also likes to cook and shiny hunt Pokemon.",
+    "image": "images/pfp.jpg",
+    "weight": 300,
+    "rarity": "uncommon"
+  },
+  {
+    "id": "card_085",
+    "name": "MrBean12235",
+    "description": "MrBean or the Destoryer or whatever he calls himself nowadays.",
+    "image": "images/pfp.jpg",
+    "weight": 300,
+    "rarity": "uncommon"
+  },
+  {
+    "id": "card_086",
+    "name": "MufcTonny",
+    "description": "One of my good IRL friends who also enjoys Pokemon a lot.",
+    "image": "images/pfp.jpg",
+    "weight": 300,
+    "rarity": "uncommon"
+  },
+  {
+    "id": "card_087",
+    "name": "NatNutCake",
+    "description": "Super cool gamer girl Rocket League streamer who loves Haaland.",
+    "image": "images/pfp.jpg",
+    "weight": 300,
+    "rarity": "uncommon"
+  },
+  {
+    "id": "card_088",
+    "name": "NickPol777",
+    "description": "the person who came up with and wanted the first pink fedora bit badge.",
+    "image": "images/pfp.jpg",
+    "weight": 300,
+    "rarity": "uncommon"
+  },
+  {
+    "id": "card_089",
+    "name": "Nicolas_2774",
+    "description": "One of the people who got me streaming actively in 2026 again.",
+    "image": "images/pfp.jpg",
+    "weight": 300,
+    "rarity": "uncommon"
+  },
+  {
+    "id": "card_090",
+    "name": "NightBot",
+    "description": "BEEP BOOP.",
+    "image": "images/pfp.jpg",
+    "weight": 300,
+    "rarity": "uncommon"
+  },
+  {
+    "id": "card_091",
+    "name": "Nocturne_RL",
+    "description": ".",
+    "image": "images/pfp.jpg",
+    "weight": 300,
+    "rarity": "uncommon"
+  },
+  {
+    "id": "card_092",
+    "name": "PimvLith",
+    "description": "Little brother #2. Social. Calm. Funny.",
+    "image": "images/pfp.jpg",
+    "weight": 300,
+    "rarity": "uncommon"
+  },
+  {
+    "id": "card_093",
+    "name": "Poggiiee",
+    "description": "Valorant duo for a while. Hype woman.",
+    "image": "images/pfp.jpg",
+    "weight": 300,
+    "rarity": "uncommon"
+  },
+  {
+    "id": "card_094",
+    "name": "PrismaPlasmatischeLamar",
+    "description": "BEER. GAMBLING. What more do you need. Lama has a special place in my heart. Biggest Hype man.",
+    "image": "images/pfp.jpg",
+    "weight": 300,
+    "rarity": "uncommon"
+  },
+  {
+    "id": "card_095",
+    "name": "Pty_music",
+    "description": "Rocket League freestyler and insane at spike rush.",
+    "image": "images/pfp.jpg",
+    "weight": 300,
+    "rarity": "uncommon"
+  },
+  {
+    "id": "card_096",
+    "name": "Qose_",
+    "description": "Frequent Rocket League tournament joiner.",
+    "image": "images/pfp.jpg",
+    "weight": 300,
+    "rarity": "uncommon"
+  },
+  {
+    "id": "card_097",
+    "name": "RealTrueBeast",
+    "description": "Verified Youtuber and a good friend of mine. Beast and I got affiliated 2 days apart 8 years ago... Insane.",
+    "image": "images/pfp.jpg",
+    "weight": 300,
+    "rarity": "uncommon"
+  },
+  {
+    "id": "card_098",
+    "name": "Shock3ddd",
+    "description": "One of my earliest supporters who got me into streaming. Used to be an amazing streamer himself.",
+    "image": "images/pfp.jpg",
+    "weight": 300,
+    "rarity": "uncommon"
+  },
+  {
+    "id": "card_099",
+    "name": "ShreyashLava1",
+    "description": "Very cool Pokemon enjoyer and insane at Trackmania. Easy to ragebait.",
+    "image": "images/pfp.jpg",
+    "weight": 300,
+    "rarity": "uncommon"
+  },
+  {
+    "id": "card_100",
+    "name": "StreamElements",
+    "description": "Bot that has a lot of my random picker tools and the loyalty system.",
+    "image": "images/pfp.jpg",
+    "weight": 300,
+    "rarity": "uncommon"
+  },
+  {
+    "id": "card_101",
+    "name": "sxyycfr",
+    "description": "Used to be named differently. Don't remember much about them because of it sadly.",
+    "image": "images/pfp.jpg",
+    "weight": 300,
+    "rarity": "uncommon"
+  },
+  {
+    "id": "card_102",
+    "name": "Varafiedd",
+    "description": "Owner of the Retired rS. Wonderful memories thanks a lot dude.",
+    "image": "images/pfp.jpg",
+    "weight": 300,
+    "rarity": "uncommon"
+  },
+  {
+    "id": "card_103",
+    "name": "Wide_Shady21",
+    "description": "German who has gifted the most subs and was a big supporter during Valorant days.",
+    "image": "images/pfp.jpg",
+    "weight": 300,
+    "rarity": "uncommon"
+  },
+  {
+    "id": "card_104",
+    "name": "WizeBot",
+    "description": "Bans all the stupid bots. Thank you for your service.",
+    "image": "images/pfp.jpg",
+    "weight": 300,
+    "rarity": "uncommon"
+  },
+  {
+    "id": "card_105",
+    "name": "Wutruh",
+    "description": "Rightback/Rightwinger fot my football team who I carry on Rocket League.",
+    "image": "images/pfp.jpg",
+    "weight": 300,
+    "rarity": "uncommon"
+  },
+  {
+    "id": "card_106",
+    "name": "Tr3myGD",
+    "description": "Beat Cataclysm on Geometry Dash. Greek Guy who started streaming recently.",
+    "image": "images/pfp.jpg",
+    "weight": 300,
+    "rarity": "uncommon"
+  },
+  {
+    "id": "card_107",
+    "name": "ThreeTwenty8",
+    "description": "One of the coolest streamers I've ever seen. Puts a ton of work into his content creation.",
+    "image": "images/pfp.jpg",
+    "weight": 300,
+    "rarity": "uncommon"
+  },
+  {
+    "id": "card_108",
+    "name": "HexaDona",
+    "description": "Mommy type of streamer who spread BRIMJOB awareness through tiktok.",
+    "image": "images/pfp.jpg",
+    "weight": 300,
+    "rarity": "uncommon"
+  },
+  {
+    "id": "card_109",
+    "name": "Merretje",
+    "description": "Partnered Dutch Twitch Streamer who followed me after a game of valorant.",
+    "image": "images/pfp.jpg",
+    "weight": 300,
+    "rarity": "uncommon"
+  },
+  {
+    "id": "card_110",
+    "name": "SoundLogic17",
+    "description": "Palworld ball knower. Has some really cool vintage Pokemon Cards.",
+    "image": "images/pfp.jpg",
+    "weight": 300,
+    "rarity": "uncommon"
+  },
+  {
+    "id": "card_111",
+    "name": "Palette",
+    "description": "Overwatch Duo. Juno, Bunny and Kitty lover.",
+    "image": "images/pfp.jpg",
+    "weight": 300,
+    "rarity": "uncommon"
+  },
+  {
+    "id": "card_112",
+    "name": "DougDoug",
+    "description": "Bell pepper who is one of my favorite content creators of all time.",
+    "image": "images/pfp.jpg",
+    "weight": 300,
+    "rarity": "uncommon"
+  },
+  {
+    "id": "card_113",
+    "name": "442oons",
+    "description": "Love this guys football animations. Very skilled youtuber.",
+    "image": "images/pfp.jpg",
+    "weight": 300,
+    "rarity": "uncommon"
+  },
+  {
+    "id": "card_114",
+    "name": "Bankzitters",
+    "description": "The Dutch sidemen. Played football against one of them.",
+    "image": "images/pfp.jpg",
+    "weight": 300,
+    "rarity": "uncommon"
+  },
+  {
+    "id": "card_115",
+    "name": "Binging with Babish",
+    "description": "Lovely food creator. Love when he makes food from cartoons or TV shows.",
+    "image": "images/pfp.jpg",
+    "weight": 300,
+    "rarity": "uncommon"
+  },
+        {
+    "id": "card_116",
+    "name": "PerryPog",
+    "description": "Perry the Platypus Pogging for me.",
+    "image": "images/Placeholder.png",
+    "weight": 100,
+    "rarity": "rare"
+  },
+  {
+    "id": "card_117",
+    "name": "PerryHype",
+    "description": "Perry the Platypus hyping me up.",
+    "image": "images/Placeholder.png",
+    "weight": 100,
+    "rarity": "rare"
+  },
+  {
+    "id": "card_118",
+    "name": "GambleBigWin",
+    "description": "Emote to hype up how lucky I am.",
+    "image": "images/Placeholder.png",
+    "weight": 100,
+    "rarity": "rare"
+  },
+  {
+    "id": "card_119",
+    "name": "GambleFail",
+    "description": "Facepalm at how unlucky I am.",
+    "image": "images/Placeholder.png",
+    "weight": 100,
+    "rarity": "rare"
+  },
+  {
+    "id": "card_120",
+    "name": "PerryTrophy",
+    "description": "Trophy featuring Perry the Platypus.",
+    "image": "images/Placeholder.png",
+    "weight": 100,
+    "rarity": "rare"
+  },
+  {
+    "id": "card_121",
+    "name": "PerrySus",
+    "description": "Perry the Platypus, but as an among us character.",
+    "image": "images/Placeholder.png",
+    "weight": 100,
+    "rarity": "rare"
+  },
+  {
+    "id": "card_122",
+    "name": "BrimTroll",
+    "description": "Brimstone Trollface, because he is so fun to play shotguns or lineups with.",
+    "image": "images/Placeholder.png",
+    "weight": 100,
+    "rarity": "rare"
+  },
+  {
+    "id": "card_123",
+    "name": "CaughtIn4k",
+    "description": "Whenever you catch me saying something sus in 2k (resolution I stream in).",
+    "image": "images/Placeholder.png",
+    "weight": 100,
+    "rarity": "rare"
+  },
+  {
+    "id": "card_124",
+    "name": "TomPog",
+    "description": "Tom pogging at how cool he and his community are.",
+    "image": "images/Placeholder.png",
+    "weight": 100,
+    "rarity": "rare"
+  },
+  {
+    "id": "card_125",
+    "name": "PerryPain",
+    "description": "Perry the Platypus crying for the pain he's went through.",
+    "image": "images/Placeholder.png",
+    "weight": 100,
+    "rarity": "rare"
+  },
+  {
+    "id": "card_126",
+    "name": "TomAbsoluteCinema",
+    "description": "Absolute Cinema.",
+    "image": "images/Placeholder.png",
+    "weight": 100,
+    "rarity": "rare"
+  },
+  {
+    "id": "card_127",
+    "name": "PerryRage",
+    "description": "AAAAAAAAAAAAAAAAAAAAAAAAA.",
+    "image": "images/Placeholder.png",
+    "weight": 100,
+    "rarity": "rare"
+  },
+  {
+    "id": "card_128",
+    "name": "TomGooner",
+    "description": "Tom with Whipped Cream on his face (Thanks 8 year Twitch Affiliate Anniversary..).",
+    "image": "images/Placeholder.png",
+    "weight": 100,
+    "rarity": "rare"
+  },
+  {
+    "id": "card_129",
+    "name": "PerryLUL",
+    "description": "Popular Twitch emote, but Perry the Platypus.",
+    "image": "images/Placeholder.png",
+    "weight": 100,
+    "rarity": "rare"
+  },
+  {
+    "id": "card_130",
+    "name": "MadDoof",
+    "description": "Trembling with rage and inator ideas.",
+    "image": "images/Placeholder.png",
+    "weight": 100,
+    "rarity": "rare"
+  },
+  {
+    "id": "card_131",
+    "name": "PhineasSpin",
+    "description": "Phineas spinning like a tortilla chip.",
+    "image": "images/Placeholder.png",
+    "weight": 100,
+    "rarity": "rare"
+  },
+  {
+    "id": "card_132",
+    "name": "FerbWork",
+    "description": "Ferb going to work on another fun day.",
+    "image": "images/Placeholder.png",
+    "weight": 100,
+    "rarity": "rare"
+  },
+  {
+    "id": "card_133",
+    "name": "PeterHeHeHe",
+    "description": "Peter Griffin Laughing his iconic hehehe.",
+    "image": "images/Placeholder.png",
+    "weight": 100,
+    "rarity": "rare"
+  },
+  {
+    "id": "card_134",
+    "name": "TomMad",
+    "description": "$%#$@* $#&^$*#$$ *&$#^$^$#.",
+    "image": "images/Placeholder.png",
+    "weight": 100,
+    "rarity": "rare"
+  },
+  {
+    "id": "card_135",
+    "name": "TomDevastated",
+    "description": "Tom in the rain contemplating his life decisions.",
+    "image": "images/Placeholder.png",
+    "weight": 100,
+    "rarity": "rare"
+  },
+  {
+    "id": "card_136",
+    "name": "TomCreepy",
+    "description": "Watch out. I'm watching.",
+    "image": "images/Placeholder.png",
+    "weight": 100,
+    "rarity": "rare"
+  },
+  {
+    "id": "card_137",
+    "name": "TomRun",
+    "description": "COME HERE BOY. I'M FAST AS FUCK.",
+    "image": "images/Placeholder.png",
+    "weight": 100,
+    "rarity": "rare"
+  },
+  {
+    "id": "card_138",
+    "name": "TNTBalls",
+    "description": "BOOM Balls hehe.",
+    "image": "images/Placeholder.png",
+    "weight": 100,
+    "rarity": "rare"
+  },
+  {
+    "id": "card_139",
+    "name": "TomSteve",
+    "description": "The resemblance is uncanny.",
+    "image": "images/Placeholder.png",
+    "weight": 100,
+    "rarity": "rare"
+  },
+  {
+    "id": "card_140",
+    "name": "TomGoodBoy",
+    "description": "Hand petting me. Whose is it?",
+    "image": "images/Placeholder.png",
+    "weight": 100,
+    "rarity": "rare"
+  },
+  {
+    "id": "card_141",
+    "name": "TomDance",
+    "description": "Tom dancing to his favorite tunes.",
+    "image": "images/Placeholder.png",
+    "weight": 100,
+    "rarity": "rare"
+  },
+  {
+    "id": "card_142",
+    "name": "CandaceMusic",
+    "description": "Candace is shaped like an earbud.",
+    "image": "images/Placeholder.png",
+    "weight": 100,
+    "rarity": "rare"
+  },
+  {
+    "id": "card_143",
+    "name": "PerryConfused",
+    "description": "Perry the Platypus after he heard something sus.",
+    "image": "images/Placeholder.png",
+    "weight": 100,
+    "rarity": "rare"
+  },
+  {
+    "id": "card_144",
+    "name": "PerryFood",
+    "description": "Om nom nom.",
+    "image": "images/Placeholder.png",
+    "weight": 100,
+    "rarity": "rare"
+  },
+  {
+    "id": "card_145",
+    "name": "PerryBoom",
+    "description": "Haha Rocket League car go boom.",
+    "image": "images/Placeholder.png",
+    "weight": 100,
+    "rarity": "rare"
+  },
+          {
+    "id": "card_146",
+    "name": "Tom",
+    "description": "Just Tom.",
+    "image": "images/TomTom.jpg",
+    "weight": 45,
+    "rarity": "legendary"
+  },
+            {
+    "id": "card_147",
+    "name": "ShinyTom",
+    "description": "Tom, but shiny.",
+    "image": "images/TomShiny.jpg",
+    "weight": 45,
+    "rarity": "legendary"
+  },
+            {
+    "id": "card_148",
+    "name": "TomMuscle",
+    "description": "Tom, but strong.",
+    "image": "images/TomBuff.jpg",
+    "weight": 45,
+    "rarity": "legendary"
+  },
+            {
+    "id": "card_149",
+    "name": "TomWoman",
+    "description": "Tom, but woman.",
+    "image": "images/TomWoman.jpg",
+    "weight": 45,
+    "rarity": "legendary"
+  },
+            {
+    "id": "card_150",
+    "name": "TomFat",
+    "description": "Tom, but fat.",
+    "image": "images/TomFat.jpg",
+    "weight": 45,
+    "rarity": "legendary"
+  },
+            {
+    "id": "card_151",
+    "name": "TomDrunk",
+    "description": "Tom, but drunk.",
+    "image": "images/TomDrunk.jpg",
+    "weight": 45,
+    "rarity": "legendary"
+  },
+            {
+    "id": "card_152",
+    "name": "TomTiny",
+    "description": "Tom, but tiny.",
+    "image": "images/TomTiny.jpg",
+    "weight": 45,
+    "rarity": "legendary"
+  },
+            {
+    "id": "card_153",
+    "name": "TomOld",
+    "description": "Tom, but old.",
+    "image": "images/TomOld.jpg",
+    "weight": 45,
+    "rarity": "legendary"
+  },
+            {
+    "id": "card_154",
+    "name": "TomFreaky",
+    "description": "Tom, but freaky.",
+    "image": "images/TomFreaky.jpg",
+    "weight": 45,
+    "rarity": "legendary"
+  },
+            {
+    "id": "card_155",
+    "name": "TomGinger",
+    "description": "Tom, but soulless.",
+    "image": "images/TomGinger.jpg",
+    "weight": 45,
+    "rarity": "legendary"
+  },
+            {
+    "id": "card_156",
+    "name": "Clinger Clip",
+    "description": "Tom 8 years ago with his high pitched voice blames and rages at game.",
+    "image": "images/Clinger.png",
+    "weight": 5,
+    "rarity": "secret"
+  },
+              {
+    "id": "card_157",
+    "name": "YOOOOOOOO Ace",
+    "description": "YOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO That's gonna be a clip.",
+    "image": "images/YOO.png",
+    "weight": 5,
+    "rarity": "secret"
+  },
+              {
+    "id": "card_158",
+    "name": "Griddy",
+    "description": "I regret this.",
+    "image": "images/Griddy.png",
+    "weight": 5,
+    "rarity": "secret"
+  },
+              {
+    "id": "card_159",
+    "name": "I'm so much better than you",
+    "description": "No, no you're not...",
+    "image": "images/Better.png",
+    "weight": 5,
+    "rarity": "secret"
+  },
+              {
+    "id": "card_160",
+    "name": "Wait noooo",
+    "description": "Wait no Wait no Wait no Wait no Wait no Wait no Wait no  Wait no Wait no  Wait no Wait no Wait no.",
+    "image": "images/WaitNo.png",
+    "weight": 5,
+    "rarity": "secret"
+  }
+]
