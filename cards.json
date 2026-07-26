@@ -1163,7 +1163,7 @@
     "id": "card_146",
     "name": "Tom",
     "description": "Just Tom.",
-    "image": "images/TomTom.jpg",
+    "image": "images/TomTom.jpeg",
     "weight": 45,
     "rarity": "legendary"
   },
@@ -1171,7 +1171,7 @@
     "id": "card_147",
     "name": "ShinyTom",
     "description": "Tom, but shiny.",
-    "image": "images/TomShiny.jpg",
+    "image": "images/TomShiny.jpeg",
     "weight": 45,
     "rarity": "legendary"
   },
@@ -1179,7 +1179,7 @@
     "id": "card_148",
     "name": "TomMuscle",
     "description": "Tom, but strong.",
-    "image": "images/TomBuff.jpg",
+    "image": "images/TomBuff.jpeg",
     "weight": 45,
     "rarity": "legendary"
   },
@@ -1187,7 +1187,7 @@
     "id": "card_149",
     "name": "TomWoman",
     "description": "Tom, but woman.",
-    "image": "images/TomWoman.jpg",
+    "image": "images/TomWoman.jpeg",
     "weight": 45,
     "rarity": "legendary"
   },
@@ -1195,7 +1195,7 @@
     "id": "card_150",
     "name": "TomFat",
     "description": "Tom, but fat.",
-    "image": "images/TomFat.jpg",
+    "image": "images/TomFat.jpeg",
     "weight": 45,
     "rarity": "legendary"
   },
@@ -1203,7 +1203,7 @@
     "id": "card_151",
     "name": "TomDrunk",
     "description": "Tom, but drunk.",
-    "image": "images/TomDrunk.jpg",
+    "image": "images/TomDrunk.jpeg",
     "weight": 45,
     "rarity": "legendary"
   },
@@ -1211,7 +1211,7 @@
     "id": "card_152",
     "name": "TomTiny",
     "description": "Tom, but tiny.",
-    "image": "images/TomTiny.jpg",
+    "image": "images/TomTiny.jpeg",
     "weight": 45,
     "rarity": "legendary"
   },
@@ -1219,7 +1219,7 @@
     "id": "card_153",
     "name": "TomOld",
     "description": "Tom, but old.",
-    "image": "images/TomOld.jpg",
+    "image": "images/TomOld.jpeg",
     "weight": 45,
     "rarity": "legendary"
   },
@@ -1227,7 +1227,7 @@
     "id": "card_154",
     "name": "TomFreaky",
     "description": "Tom, but freaky.",
-    "image": "images/TomFreaky.jpg",
+    "image": "images/TomFreaky.jpeg",
     "weight": 45,
     "rarity": "legendary"
   },
@@ -1235,7 +1235,7 @@
     "id": "card_155",
     "name": "TomGinger",
     "description": "Tom, but soulless.",
-    "image": "images/TomGinger.jpg",
+    "image": "images/TomGinger.jpeg",
     "weight": 45,
     "rarity": "legendary"
   },
