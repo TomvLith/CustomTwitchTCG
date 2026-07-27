@@ -160,6 +160,10 @@
   let socket;
   let masterCards = {};
 
+  // Queue and Processing Flags
+  const animationQueue = [];
+  let isAnimating = false;
+
   const overlayContainer = document.getElementById('overlay-container');
   const userBadge = document.getElementById('username');
   const cardStage = document.getElementById('card-stage');
@@ -187,7 +191,6 @@
     const cardEl = document.createElement('div');
     cardEl.className = 'card';
 
-    // Map rarity to its specific card design file
     const rarityMap = {
       "common": "images/cCard.png",
       "uncommon": "images/uCard.png",
@@ -196,7 +199,6 @@
       "secret": "images/sCard.png"
     };
 
-    // Check cardData rarity first; if missing, look it up in masterCards using the id
     let rawRarity = cardData.rarity;
     if (!rawRarity && masterCards[cardData.id]) {
       rawRarity = masterCards[cardData.id].rarity;
@@ -235,39 +237,58 @@
       socket.send(JSON.stringify(subscribeMsg));
     };
 
-    socket.onmessage = (event) => {
-      console.log("Raw WS Message Received:", event.data);
+  socket.onmessage = (event) => {
+  console.log("Raw WS Message Received:", event.data);
 
-      try {
-        let data = JSON.parse(event.data);
+  try {
+    let payload = JSON.parse(event.data);
 
-        if (typeof data === "string") {
-          data = JSON.parse(data);
-        }
+    // Recursively unwrap stringified JSON properties if Streamer.bot stringified them
+    while (typeof payload === 'string') {
+      payload = JSON.parse(payload);
+    }
 
-        if (data.data) {
-          if (typeof data.data === "string") {
-            try { data = JSON.parse(data.data); } catch(e) {}
-          } else {
-            data = data.data;
-          }
-        }
-
-        console.log("Parsed Data Object:", data);
-
-        if (data && data.event_type === "pack_opened") {
-          console.log("Triggering Pack Opening for:", data.user);
-          triggerPackOpening(data.user, data.cards);
-        }
-      } catch (err) {
-        console.error("Error parsing WS message:", err);
+    // Extract inner payload from Streamer.bot's event wrapper
+    if (payload.data) {
+      payload = payload.data;
+      while (typeof payload === 'string') {
+        payload = JSON.parse(payload);
       }
-    };
+    }
+
+    console.log("Parsed Payload Object:", payload);
+
+    // Check for pack_opened event
+    if (payload && payload.event_type === "pack_opened") {
+      console.log("Queueing Pack Opening for:", payload.user);
+      enqueuePackOpening(payload.user, payload.cards);
+    }
+  } catch (err) {
+    console.error("Error parsing WS message:", err);
+  }
+};
 
     socket.onclose = () => {
       console.log("WebSocket connection closed. Retrying in 3s...");
       setTimeout(connectWebSocket, 3000);
     };
+  }
+
+  // --- Queue Logic Functions ---
+
+  function enqueuePackOpening(username, cards) {
+    animationQueue.push({ username, cards });
+    processQueue();
+  }
+
+  function processQueue() {
+    if (isAnimating || animationQueue.length === 0) {
+      return; // Already busy or nothing left to process
+    }
+
+    isAnimating = true;
+    const nextOpening = animationQueue.shift();
+    triggerPackOpening(nextOpening.username, nextOpening.cards);
   }
 
   function triggerPackOpening(username, cards) {
@@ -316,9 +337,14 @@
           setTimeout(showNextCard, SLIDE_ANIMATION_MS);
         }, CARD_DISPLAY_MS);
       } else {
+        // Final cleanup for this pack opening session
         setTimeout(() => {
           overlayContainer.classList.remove('active');
           cardStage.style.display = 'none';
+          
+          // Animation sequence complete, unlock queue for next item
+          isAnimating = false;
+          processQueue();
         }, 300);
       }
     }
