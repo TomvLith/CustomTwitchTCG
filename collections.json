@@ -67,9 +67,12 @@
       "card_104",
       "card_084",
       "card_009",
-      "card_030"
+      "card_030",
+      "card_008",
+      "card_014",
+      "card_082"
     ],
-    "lastUpdated": "2026-08-03T20:43:42.8835312Z"
+    "lastUpdated": "2026-08-05T17:04:19.6304730Z"
   },
   {
     "username": "RealTrueBeast",
@@ -823,9 +826,72 @@
       "card_005",
       "card_069",
       "card_089",
-      "card_051"
+      "card_051",
+      "card_083",
+      "card_104",
+      "card_038",
+      "card_112",
+      "card_031",
+      "card_016",
+      "card_048",
+      "card_094",
+      "card_111",
+      "card_027",
+      "card_038",
+      "card_013",
+      "card_026",
+      "card_090",
+      "card_054",
+      "card_061",
+      "card_022",
+      "card_045",
+      "card_028",
+      "card_001",
+      "card_147",
+      "card_029",
+      "card_048",
+      "card_070",
+      "card_032",
+      "card_036",
+      "card_047",
+      "card_023",
+      "card_087",
+      "card_022",
+      "card_129",
+      "card_008",
+      "card_028",
+      "card_035",
+      "card_019",
+      "card_029",
+      "card_090",
+      "card_066",
+      "card_062",
+      "card_025",
+      "card_010",
+      "card_024",
+      "card_034",
+      "card_128",
+      "card_066",
+      "card_056",
+      "card_087",
+      "card_041",
+      "card_052",
+      "card_008",
+      "card_059",
+      "card_007",
+      "card_050",
+      "card_102",
+      "card_008",
+      "card_062",
+      "card_130",
+      "card_070",
+      "card_031",
+      "card_030",
+      "card_101",
+      "card_109",
+      "card_062"
     ],
-    "lastUpdated": "2026-08-05T16:59:44.2252756Z"
+    "lastUpdated": "2026-08-05T18:13:27.7865279Z"
   },
   {
     "username": "rayyanetereborn",
@@ -871,5 +937,17 @@
       "card_016"
     ],
     "lastUpdated": "2026-08-03T20:24:59.5196332Z"
+  },
+  {
+    "username": "dandaloria",
+    "cardIds": [
+      "card_040",
+      "card_088",
+      "card_067",
+      "card_073",
+      "card_025",
+      "card_004"
+    ],
+    "lastUpdated": "2026-08-05T18:11:26.2322716Z"
   }
 ]
