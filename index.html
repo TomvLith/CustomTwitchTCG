@@ -262,177 +262,182 @@
 
   <main class="grid-container" id="grid"></main>
 
-  <script>
-    let masterCards = {};
-    let collectionsData = [];
+<script>
+  let masterCards = {};
+  let collectionsData = [];
 
-    function createCardElement(cardData) {
-      const formattedId = cardData.id.replace('card_', '#');
-      const cardWrapper = document.createElement('div');
-      cardWrapper.className = 'card-template-wrapper';
+  function createCardElement(cardData) {
+    const formattedId = cardData.id.replace('card_', '#');
+    const cardWrapper = document.createElement('div');
+    cardWrapper.className = 'card-template-wrapper';
 
-      const rarityMap = {
-        "common": "images/cCard.png",
-        "uncommon": "images/uCard.png",
-        "rare": "images/rCard.png",
-        "legendary": "images/lCard.png",
-        "secret": "images/sCard.png"
+    const rarityMap = {
+      "common": "images/cCard.png",
+      "uncommon": "images/uCard.png",
+      "rare": "images/rCard.png",
+      "legendary": "images/lCard.png",
+      "secret": "images/sCard.png"
+    };
+
+    const rarityKey = (cardData.rarity || "common").toLowerCase();
+    const templateBg = rarityMap[rarityKey] || rarityMap["common"];
+    
+    cardWrapper.style.backgroundImage = `url('${templateBg}')`;
+
+    cardWrapper.innerHTML = `
+      <div class="card-dynamic-title">${cardData.name}</div>
+      <div class="card-dynamic-image-container">
+        <img class="card-dynamic-image" src="${cardData.image}" alt="${cardData.name}" />
+      </div>
+      <div class="card-dynamic-desc">${cardData.description}</div>
+      <div class="card-dynamic-id">${formattedId}</div>
+    `;
+
+    return cardWrapper;
+  }
+
+  async function init() {
+    try {
+      const [cardsResp, collectionsResp] = await Promise.all([
+        fetch('cards.json'),
+        fetch('collections.json')
+      ]);
+
+      if (!cardsResp.ok || !collectionsResp.ok) {
+        throw new Error('HTTP error loading JSON files');
+      }
+
+      const rawCards = await cardsResp.json();
+      collectionsData = await collectionsResp.json();
+
+      rawCards.forEach(c => {
+        masterCards[c.id] = c;
+      });
+
+      renderLeaderboard();
+
+      // Listen for typing in the search bar
+      const userInput = document.getElementById('user-input');
+      userInput.addEventListener('input', (e) => {
+        renderUserCollection(e.target.value);
+      });
+
+    } catch (err) {
+      console.error("Error loading TCG data:", err);
+      document.getElementById('stats').innerHTML = 
+        `<span style="color: #ff5555;">Failed to load data. Make sure you are using a local server (e.g. Live Server in VS Code) and not opening index.html directly via file://</span>`;
+    }
+  }
+
+  function renderLeaderboard() {
+    const container = document.getElementById('leaderboard-box');
+    const chipsArea = document.getElementById('leaderboard-chips');
+    
+    if (!collectionsData.length) return;
+
+    const userStats = {};
+
+    collectionsData.forEach(entry => {
+      if (!entry.username || !Array.isArray(entry.cardIds)) return;
+      
+      const key = entry.username.toLowerCase();
+      if (!userStats[key]) {
+        userStats[key] = { displayName: entry.username, uniqueCards: new Set() };
+      }
+      
+      entry.cardIds.forEach(id => userStats[key].uniqueCards.add(id));
+    });
+
+    const sortedUsers = Object.values(userStats)
+      .sort((a, b) => b.uniqueCards.size - a.uniqueCards.size)
+      .slice(0, 8);
+
+    if (sortedUsers.length === 0) return;
+
+    chipsArea.innerHTML = '';
+    sortedUsers.forEach(u => {
+      const chip = document.createElement('button');
+      chip.className = 'user-chip';
+      chip.innerHTML = `${u.displayName} <span class="badge">${u.uniqueCards.size}/${Object.keys(masterCards).length}</span>`;
+      
+      chip.onclick = () => {
+        const input = document.getElementById('user-input');
+        input.value = u.displayName;
+        renderUserCollection(u.displayName);
       };
 
-      const rarityKey = (cardData.rarity || "common").toLowerCase();
-      const templateBg = rarityMap[rarityKey] || rarityMap["common"];
-      
-      cardWrapper.style.backgroundImage = `url('${templateBg}')`;
+      chipsArea.appendChild(chip);
+    });
 
-      cardWrapper.innerHTML = `
-        <div class="card-dynamic-title">${cardData.name}</div>
-        <div class="card-dynamic-image-container">
-          <img class="card-dynamic-image" src="${cardData.image}" alt="${cardData.name}" />
-        </div>
-        <div class="card-dynamic-desc">${cardData.description}</div>
-        <div class="card-dynamic-id">${formattedId}</div>
-      `;
+    container.style.display = 'flex';
+  }
 
-      return cardWrapper;
+  function renderUserCollection(username) {
+    const grid = document.getElementById('grid');
+    const stats = document.getElementById('stats');
+    grid.innerHTML = '';
+
+    if (!username.trim()) {
+      stats.textContent = "Type a username above to begin.";
+      return;
     }
 
-    async function init() {
-      try {
-        const [cardsResp, collectionsResp] = await Promise.all([
-          fetch('cards.json'),
-          fetch('collections.json')
-        ]);
+    const cleanUser = username.trim().toLowerCase();
 
-        if (!cardsResp.ok || !collectionsResp.ok) {
-          throw new Error('HTTP error loading JSON files');
-        }
+    const userEntries = collectionsData.filter(entry => 
+      entry.username && entry.username.toLowerCase() === cleanUser
+    );
 
-        const rawCards = await cardsResp.json();
-        collectionsData = await collectionsResp.json();
+    const cardCounts = {};
+    let totalCardsOwned = 0;
 
-        rawCards.forEach(c => {
-          masterCards[c.id] = c;
+    userEntries.forEach(entry => {
+      if (Array.isArray(entry.cardIds)) {
+        entry.cardIds.forEach(id => {
+          cardCounts[id] = (cardCounts[id] || 0) + 1;
+          totalCardsOwned++;
         });
-
-        renderLeaderboard();
-
-      } catch (err) {
-        console.error("Error loading TCG data:", err);
-        document.getElementById('stats').innerHTML = 
-          `<span style="color: #ff5555;">Failed to load data. Make sure you are using a local server (e.g. Live Server in VS Code) and not opening index.html directly via file://</span>`;
       }
+    });
+
+    const uniqueOwnedCount = Object.keys(cardCounts).length;
+    const totalUniqueInGame = Object.keys(masterCards).length;
+
+    if (totalCardsOwned === 0) {
+      grid.innerHTML = `<div class="empty-state">No cards found for user "${username}".</div>`;
+      stats.textContent = `0 cards collected`;
+      return;
     }
 
-    function renderLeaderboard() {
-      const container = document.getElementById('leaderboard-box');
-      const chipsArea = document.getElementById('leaderboard-chips');
+    stats.textContent = `${username} owns ${totalCardsOwned} total cards (${uniqueOwnedCount}/${totalUniqueInGame} unique)`;
+
+    const sortedCardIds = Object.keys(cardCounts).sort((a, b) => {
+      return a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' });
+    });
+
+    sortedCardIds.forEach(cardId => {
+      const cardObj = masterCards[cardId];
+      if (!cardObj) return;
+
+      const count = cardCounts[cardId];
+
+      const cardEl = document.createElement('div');
+      cardEl.className = 'card-item';
       
-      if (!collectionsData.length) return;
+      const renderedCard = createCardElement(cardObj);
 
-      const userStats = {};
-
-      collectionsData.forEach(entry => {
-        if (!entry.username || !Array.isArray(entry.cardIds)) return;
-        
-        const key = entry.username.toLowerCase();
-        if (!userStats[key]) {
-          userStats[key] = { displayName: entry.username, uniqueCards: new Set() };
-        }
-        
-        entry.cardIds.forEach(id => userStats[key].uniqueCards.add(id));
-      });
-
-      const sortedUsers = Object.values(userStats)
-        .sort((a, b) => b.uniqueCards.size - a.uniqueCards.size)
-        .slice(0, 8);
-
-      if (sortedUsers.length === 0) return;
-
-      chipsArea.innerHTML = '';
-      sortedUsers.forEach(u => {
-        const chip = document.createElement('button');
-        chip.className = 'user-chip';
-        chip.innerHTML = `${u.displayName} <span class="badge">${u.uniqueCards.size}/${Object.keys(masterCards).length}</span>`;
-        
-        chip.onclick = () => {
-          const input = document.getElementById('user-input');
-          input.value = u.displayName;
-          renderUserCollection(u.displayName);
-        };
-
-        chipsArea.appendChild(chip);
-      });
-
-      container.style.display = 'flex';
-    }
-
-    function renderUserCollection(username) {
-      const grid = document.getElementById('grid');
-      const stats = document.getElementById('stats');
-      grid.innerHTML = '';
-
-      if (!username.trim()) {
-        stats.textContent = "Type a username above to begin.";
-        return;
-      }
-
-      const cleanUser = username.trim().toLowerCase();
-
-      const userEntries = collectionsData.filter(entry => 
-        entry.username && entry.username.toLowerCase() === cleanUser
-      );
-
-      const cardCounts = {};
-      let totalCardsOwned = 0;
-
-      userEntries.forEach(entry => {
-        if (Array.isArray(entry.cardIds)) {
-          entry.cardIds.forEach(id => {
-            cardCounts[id] = (cardCounts[id] || 0) + 1;
-            totalCardsOwned++;
-          });
-        }
-      });
-
-      const uniqueOwnedCount = Object.keys(cardCounts).length;
-      const totalUniqueInGame = Object.keys(masterCards).length;
-
-      if (totalCardsOwned === 0) {
-        grid.innerHTML = `<div class="empty-state">No cards found for user "${username}".</div>`;
-        stats.textContent = `0 cards collected`;
-        return;
-      }
-
-      stats.textContent = `${username} owns ${totalCardsOwned} total cards (${uniqueOwnedCount}/${totalUniqueInGame} unique)`;
-
-      // Sort the card IDs alphabetically/numerically (e.g., card_001, card_002, etc.)
-      const sortedCardIds = Object.keys(cardCounts).sort((a, b) => {
-        return a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' });
-      });
-
-      sortedCardIds.forEach(cardId => {
-        const cardObj = masterCards[cardId];
-        if (!cardObj) return;
-
-        const count = cardCounts[cardId];
-
-        const cardEl = document.createElement('div');
-        cardEl.className = 'card-item';
-        
-        const renderedCard = createCardElement(cardObj);
-
-        cardEl.innerHTML = `
-          <div class="card-details">
-            <span class="card-count">x${count}</span>
-          </div>
-        `;
-        
-        cardEl.insertBefore(renderedCard, cardEl.firstChild);
-        grid.appendChild(cardEl);
-      });
-    }
-    
-    init();
-  </script>
+      cardEl.innerHTML = `
+        <div class="card-details">
+          <span class="card-count">x${count}</span>
+        </div>
+      `;
+      
+      cardEl.insertBefore(renderedCard, cardEl.firstChild);
+      grid.appendChild(cardEl);
+    });
+  }
+  
+  init();
+</script>
 </body>
 </html>
