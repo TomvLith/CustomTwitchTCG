@@ -187,17 +187,51 @@
     .catch(err => console.error("Could not load cards.json in overlay:", err));
 
   function createCardElement(cardData) {
-    const formattedId = cardData.id.replace('card_', '#');
-    const cardEl = document.createElement('div');
-    cardEl.className = 'card';
+  const formattedId = cardData.id.replace('card_', '#');
+  const cardEl = document.createElement('div');
+  cardEl.className = 'card';
 
-    const rarityMap = {
-      "common": "images/cCard.png",
-      "uncommon": "images/uCard.png",
-      "rare": "images/rCard.png",
-      "legendary": "images/lCard.png",
-      "secret": "images/sCard.png"
-    };
+  const rarityMap = {
+    "common": "images/cCard.png",
+    "uncommon": "images/uCard.png",
+    "rare": "images/rCard.png",
+    "legendary": "images/lCard.png",
+    "secret": "images/sCard.png",
+    "custom1": "images/custom1Card.png"
+  };
+
+  let rawRarity = cardData.rarity;
+  if (!rawRarity && masterCards[cardData.id]) {
+    rawRarity = masterCards[cardData.id].rarity;
+  }
+
+  const rarityKey = rawRarity ? rawRarity.toLowerCase() : "common";
+
+  // Check if this card is full-art / single-image
+  if (rarityKey === "custom1") {
+    cardEl.style.backgroundImage = `url('${cardData.image}')`;
+    cardEl.style.backgroundSize = "cover";
+    cardEl.style.backgroundPosition = "center";
+    
+    // Renders only the full card image without text/frame overlays
+    cardEl.innerHTML = ''; 
+  } else {
+    // Normal card layout with border frame, title, description, and sub-image
+    const templateBg = rarityMap[rarityKey] || rarityMap["common"];
+    cardEl.style.backgroundImage = `url('${templateBg}')`;
+
+    cardEl.innerHTML = `
+      <div class="card-dynamic-title">${cardData.name}</div>
+      <div class="card-dynamic-image-container">
+        <img class="card-dynamic-image" src="${cardData.image}" alt="${cardData.name}" />
+      </div>
+      <div class="card-dynamic-desc">${cardData.description}</div>
+      <div class="card-dynamic-id">${formattedId}</div>
+    `;
+  }
+
+  return cardEl;
+}
 
     let rawRarity = cardData.rarity;
     if (!rawRarity && masterCards[cardData.id]) {
@@ -219,7 +253,7 @@
     `;
 
     return cardEl;
-  }
+  
 
   function connectWebSocket() {
     socket = new WebSocket(WS_URL);
