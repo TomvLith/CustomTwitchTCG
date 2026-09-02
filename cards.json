@@ -1284,7 +1284,7 @@
     "name": "Tom",
     "description": "",
     "image": "images/custom1.png",
-    "weight": 20000000,
+    "weight": 200,
     "rarity": "custom1"
   }
 ]

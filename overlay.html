@@ -154,7 +154,6 @@
 
     <div id="card-stage"></div>
   </div>
-
 <script>
   const WS_URL = "ws://127.0.0.1:8080/";
   let socket;
@@ -191,15 +190,6 @@
   const cardEl = document.createElement('div');
   cardEl.className = 'card';
 
-  const rarityMap = {
-    "common": "images/cCard.png",
-    "uncommon": "images/uCard.png",
-    "rare": "images/rCard.png",
-    "legendary": "images/lCard.png",
-    "secret": "images/sCard.png",
-    "custom1": "images/custom1Card.png"
-  };
-
   let rawRarity = cardData.rarity;
   if (!rawRarity && masterCards[cardData.id]) {
     rawRarity = masterCards[cardData.id].rarity;
@@ -207,53 +197,43 @@
 
   const rarityKey = rawRarity ? rawRarity.toLowerCase() : "common";
 
-  // Check if this card is full-art / single-image
+  // Full-art / single-image rendering for custom1
   if (rarityKey === "custom1") {
     cardEl.style.backgroundImage = `url('${cardData.image}')`;
-    cardEl.style.backgroundSize = "cover";
+    cardEl.style.backgroundSize = "100% 100%";
     cardEl.style.backgroundPosition = "center";
+    cardEl.style.backgroundRepeat = "no-repeat";
     
-    // Renders only the full card image without text/frame overlays
+    // Clear out standard border elements and title overlays
     cardEl.innerHTML = ''; 
-  } else {
-    // Normal card layout with border frame, title, description, and sub-image
-    const templateBg = rarityMap[rarityKey] || rarityMap["common"];
-    cardEl.style.backgroundImage = `url('${templateBg}')`;
-
-    cardEl.innerHTML = `
-      <div class="card-dynamic-title">${cardData.name}</div>
-      <div class="card-dynamic-image-container">
-        <img class="card-dynamic-image" src="${cardData.image}" alt="${cardData.name}" />
-      </div>
-      <div class="card-dynamic-desc">${cardData.description}</div>
-      <div class="card-dynamic-id">${formattedId}</div>
-    `;
+    
+    // RETURN HERE to prevent lower code blocks from overwriting the element
+    return cardEl; 
   }
+
+  // Standard border frame layout for normal rarities
+  const rarityMap = {
+    "common": "images/cCard.png",
+    "uncommon": "images/uCard.png",
+    "rare": "images/rCard.png",
+    "legendary": "images/lCard.png",
+    "secret": "images/sCard.png"
+  };
+
+  const templateBg = rarityMap[rarityKey] || rarityMap["common"];
+  cardEl.style.backgroundImage = `url('${templateBg}')`;
+
+  cardEl.innerHTML = `
+    <div class="card-dynamic-title">${cardData.name}</div>
+    <div class="card-dynamic-image-container">
+      <img class="card-dynamic-image" src="${cardData.image}" alt="${cardData.name}" />
+    </div>
+    <div class="card-dynamic-desc">${cardData.description}</div>
+    <div class="card-dynamic-id">${formattedId}</div>
+  `;
 
   return cardEl;
 }
-
-    let rawRarity = cardData.rarity;
-    if (!rawRarity && masterCards[cardData.id]) {
-      rawRarity = masterCards[cardData.id].rarity;
-    }
-
-    const rarityKey = rawRarity ? rawRarity.toLowerCase() : "common";
-    const templateBg = rarityMap[rarityKey] || rarityMap["common"];
-    
-    cardEl.style.backgroundImage = `url('${templateBg}')`;
-
-    cardEl.innerHTML = `
-      <div class="card-dynamic-title">${cardData.name}</div>
-      <div class="card-dynamic-image-container">
-        <img class="card-dynamic-image" src="${cardData.image}" alt="${cardData.name}" />
-      </div>
-      <div class="card-dynamic-desc">${cardData.description}</div>
-      <div class="card-dynamic-id">${formattedId}</div>
-    `;
-
-    return cardEl;
-  
 
   function connectWebSocket() {
     socket = new WebSocket(WS_URL);
@@ -271,44 +251,39 @@
       socket.send(JSON.stringify(subscribeMsg));
     };
 
-  socket.onmessage = (event) => {
-  console.log("Raw WS Message Received:", event.data);
+    socket.onmessage = (event) => {
+      console.log("Raw WS Message Received:", event.data);
 
-  try {
-    let payload = JSON.parse(event.data);
+      try {
+        let payload = JSON.parse(event.data);
 
-    // Recursively unwrap stringified JSON properties if Streamer.bot stringified them
-    while (typeof payload === 'string') {
-      payload = JSON.parse(payload);
-    }
+        while (typeof payload === 'string') {
+          payload = JSON.parse(payload);
+        }
 
-    // Extract inner payload from Streamer.bot's event wrapper
-    if (payload.data) {
-      payload = payload.data;
-      while (typeof payload === 'string') {
-        payload = JSON.parse(payload);
+        if (payload.data) {
+          payload = payload.data;
+          while (typeof payload === 'string') {
+            payload = JSON.parse(payload);
+          }
+        }
+
+        console.log("Parsed Payload Object:", payload);
+
+        if (payload && payload.event_type === "pack_opened") {
+          console.log("Queueing Pack Opening for:", payload.user);
+          enqueuePackOpening(payload.user, payload.cards);
+        }
+      } catch (err) {
+        console.error("Error parsing WS message:", err);
       }
-    }
-
-    console.log("Parsed Payload Object:", payload);
-
-    // Check for pack_opened event
-    if (payload && payload.event_type === "pack_opened") {
-      console.log("Queueing Pack Opening for:", payload.user);
-      enqueuePackOpening(payload.user, payload.cards);
-    }
-  } catch (err) {
-    console.error("Error parsing WS message:", err);
-  }
-};
+    };
 
     socket.onclose = () => {
       console.log("WebSocket connection closed. Retrying in 3s...");
       setTimeout(connectWebSocket, 3000);
     };
   }
-
-  // --- Queue Logic Functions ---
 
   function enqueuePackOpening(username, cards) {
     animationQueue.push({ username, cards });
@@ -317,7 +292,7 @@
 
   function processQueue() {
     if (isAnimating || animationQueue.length === 0) {
-      return; // Already busy or nothing left to process
+      return;
     }
 
     isAnimating = true;
@@ -371,12 +346,10 @@
           setTimeout(showNextCard, SLIDE_ANIMATION_MS);
         }, CARD_DISPLAY_MS);
       } else {
-        // Final cleanup for this pack opening session
         setTimeout(() => {
           overlayContainer.classList.remove('active');
           cardStage.style.display = 'none';
           
-          // Animation sequence complete, unlock queue for next item
           isAnimating = false;
           processQueue();
         }, 300);

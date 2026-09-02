@@ -267,35 +267,48 @@
   let collectionsData = [];
 
   function createCardElement(cardData) {
-    const formattedId = cardData.id.replace('card_', '#');
-    const cardWrapper = document.createElement('div');
-    cardWrapper.className = 'card-template-wrapper';
+  const formattedId = cardData.id.replace('card_', '#');
+  const cardWrapper = document.createElement('div');
+  cardWrapper.className = 'card-template-wrapper';
 
-    const rarityMap = {
-      "common": "images/cCard.png",
-      "uncommon": "images/uCard.png",
-      "rare": "images/rCard.png",
-      "legendary": "images/lCard.png",
-      "secret": "images/sCard.png",
-      "custom1": "images/custom1.png"
-    };
+  const rarityMap = {
+    "common": "images/cCard.png",
+    "uncommon": "images/uCard.png",
+    "rare": "images/rCard.png",
+    "legendary": "images/lCard.png",
+    "secret": "images/sCard.png"
+  };
 
-    const rarityKey = (cardData.rarity || "common").toLowerCase();
-    const templateBg = rarityMap[rarityKey] || rarityMap["common"];
+  const rarityKey = (cardData.rarity || "common").toLowerCase();
+
+  // Handle Full-Art Custom Card Mode
+  if (rarityKey === "custom1") {
+    cardWrapper.style.backgroundImage = `url('${cardData.image}')`;
+    cardWrapper.style.backgroundSize = "100% 100%";
+    cardWrapper.style.backgroundPosition = "center";
+    cardWrapper.style.backgroundRepeat = "no-repeat";
     
-    cardWrapper.style.backgroundImage = `url('${templateBg}')`;
-
-    cardWrapper.innerHTML = `
-      <div class="card-dynamic-title">${cardData.name}</div>
-      <div class="card-dynamic-image-container">
-        <img class="card-dynamic-image" src="${cardData.image}" alt="${cardData.name}" />
-      </div>
-      <div class="card-dynamic-desc">${cardData.description}</div>
-      <div class="card-dynamic-id">${formattedId}</div>
-    `;
-
+    // Clear out standard border elements, text fields, and inner frames
+    cardWrapper.innerHTML = '';
+    
     return cardWrapper;
   }
+
+  // Handle Standard Frame Layout
+  const templateBg = rarityMap[rarityKey] || rarityMap["common"];
+  cardWrapper.style.backgroundImage = `url('${templateBg}')`;
+
+  cardWrapper.innerHTML = `
+    <div class="card-dynamic-title">${cardData.name}</div>
+    <div class="card-dynamic-image-container">
+      <img class="card-dynamic-image" src="${cardData.image}" alt="${cardData.name}" />
+    </div>
+    <div class="card-dynamic-desc">${cardData.description}</div>
+    <div class="card-dynamic-id">${formattedId}</div>
+  `;
+
+  return cardWrapper;
+}
 
   async function init() {
     try {
