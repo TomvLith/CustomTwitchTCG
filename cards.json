@@ -1286,5 +1286,13 @@
     "image": "images/custom1.png",
     "weight": 200,
     "rarity": "custom1"
+  },
+                {
+    "id": "card_162",
+    "name": "Lama",
+    "description": "",
+    "image": "images/custom2.png",
+    "weight": 200,
+    "rarity": "custom2"
   }
 ]
