@@ -198,7 +198,7 @@
   const rarityKey = rawRarity ? rawRarity.toLowerCase() : "common";
 
   // Full-art / single-image rendering for custom1
-  if (rarityKey === "custom1") {
+  if (rarityKey.startsWith("custom")) {
     cardEl.style.backgroundImage = `url('${cardData.image}')`;
     cardEl.style.backgroundSize = "100% 100%";
     cardEl.style.backgroundPosition = "center";
