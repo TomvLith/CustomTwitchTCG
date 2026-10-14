@@ -1537,9 +1537,12 @@
       "card_096",
       "card_099",
       "card_111",
-      "card_073"
+      "card_073",
+      "card_028",
+      "card_049",
+      "card_145"
     ],
-    "lastUpdated": "2026-07-29T18:16:15.2281242Z"
+    "lastUpdated": "2026-10-14T11:49:48.5208312Z"
   },
   {
     "username": "Tr3mygd",
@@ -1792,8 +1795,20 @@
     "cardIds": [
       "card_057",
       "card_024",
-      "card_125"
+      "card_125",
+      "card_042",
+      "card_026",
+      "card_072"
     ],
-    "lastUpdated": "2026-10-14T11:45:43.9085764Z"
+    "lastUpdated": "2026-10-14T11:49:52.4407905Z"
+  },
+  {
+    "username": "Razorbabe_RazorLuvr",
+    "cardIds": [
+      "card_013",
+      "card_110",
+      "card_136"
+    ],
+    "lastUpdated": "2026-10-14T11:49:55.6823204Z"
   }
 ]
