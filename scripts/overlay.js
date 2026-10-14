@@ -134,6 +134,7 @@ function triggerPackOpening(username, cards) {
         cards.forEach((card, index) => {
             const cardEl = createCardElement(card);
             
+            // Fixed clean syntax for transform math:
             cardEl.style.transform = `translateY(${index * 4}px) scale(${1 - (index * 0.02)})`;
             cardEl.style.zIndex = cards.length - index;
 
