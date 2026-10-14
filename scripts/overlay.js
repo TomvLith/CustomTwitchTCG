@@ -84,7 +84,6 @@ function connectWebSocket() {
         try {
             let payload = JSON.parse(event.data);
 
-            // Handle potential string wrapping
             while (typeof payload === 'string') {
                 payload = JSON.parse(payload);
             }
