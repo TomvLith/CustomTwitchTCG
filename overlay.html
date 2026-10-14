@@ -2,22 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="styles/overlay.css">
-  <script src="https://cdn.jsdelivr.net/npm/@streamerbot/client@latest/dist/streamerbot-client.js"></script>
-  <script src="scripts/overlay.js" defer></script>
   <title>TCG Pack Opening Overlay</title>
+  <link rel="stylesheet" href="styles/overlay.css">
 </head>
 <body>
+
   <div id="overlay-container">
     <div id="user-badge">Opening pack for: <span id="username">Viewer</span></div>
     
     <div id="pack-animation-container">
         <img id="pack-gif" class="pack-video" src="images/PackOpening.webp" style="display: none;" alt="Opening Pack..." />
     </div>
+
     <div id="card-stage"></div>
   </div>
-<script>
 
-</script>
+  <script src="scripts/overlay.js"></script>
 </body>
 </html>
