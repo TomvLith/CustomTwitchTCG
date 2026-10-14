@@ -87,7 +87,9 @@ function initStreamerBotClient() {
 }
 
 function triggerPackOpening(username, cards) {
-    userBadge.textContent = username;
+    if (userBadge) {
+        userBadge.textContent = username;
+    }
  
     cardStage.style.display = 'none';
     cardStage.innerHTML = ''; 

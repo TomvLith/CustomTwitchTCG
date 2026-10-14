@@ -1588,9 +1588,12 @@
       "card_004",
       "card_052",
       "card_031",
-      "card_035"
+      "card_035",
+      "card_024",
+      "card_093",
+      "card_134"
     ],
-    "lastUpdated": "2026-08-05T19:47:36.4373918Z"
+    "lastUpdated": "2026-10-14T11:45:47.0795143Z"
   },
   {
     "username": "Tigsanity",
@@ -1747,5 +1750,50 @@
       "card_155"
     ],
     "lastUpdated": "2026-10-14T11:39:32.7711232Z"
+  },
+  {
+    "username": "maxvlontwitch",
+    "cardIds": [
+      "card_068",
+      "card_053",
+      "card_051"
+    ],
+    "lastUpdated": "2026-10-14T11:45:23.5066775Z"
+  },
+  {
+    "username": "nicolas_2774",
+    "cardIds": [
+      "card_004",
+      "card_142",
+      "card_143"
+    ],
+    "lastUpdated": "2026-10-14T11:45:35.3940725Z"
+  },
+  {
+    "username": "unprecedentedpadrekj",
+    "cardIds": [
+      "card_026",
+      "card_063",
+      "card_162"
+    ],
+    "lastUpdated": "2026-10-14T11:45:38.3009663Z"
+  },
+  {
+    "username": "lilgrandepiugrande",
+    "cardIds": [
+      "card_033",
+      "card_044",
+      "card_152"
+    ],
+    "lastUpdated": "2026-10-14T11:45:40.8038665Z"
+  },
+  {
+    "username": "AnklesMcStankles",
+    "cardIds": [
+      "card_057",
+      "card_024",
+      "card_125"
+    ],
+    "lastUpdated": "2026-10-14T11:45:43.9085764Z"
   }
 ]
