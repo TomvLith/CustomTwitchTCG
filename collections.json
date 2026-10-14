@@ -184,9 +184,21 @@
       "card_080",
       "card_018",
       "card_023",
-      "card_159"
+      "card_159",
+      "card_151",
+      "card_154",
+      "card_162",
+      "card_042",
+      "card_025",
+      "card_097",
+      "card_006",
+      "card_013",
+      "card_124",
+      "card_065",
+      "card_122",
+      "card_116"
     ],
-    "lastUpdated": "2026-10-14T11:02:18.1083449Z"
+    "lastUpdated": "2026-10-14T11:33:40.2735619Z"
   },
   {
     "username": "RealTrueBeast",
@@ -1699,5 +1711,41 @@
       "card_053"
     ],
     "lastUpdated": "2026-09-18T17:44:29.3414296Z"
+  },
+  {
+    "username": "mihael391",
+    "cardIds": [
+      "card_001",
+      "card_078",
+      "card_092"
+    ],
+    "lastUpdated": "2026-10-14T11:38:58.0926436Z"
+  },
+  {
+    "username": "Lokii_VT",
+    "cardIds": [
+      "card_038",
+      "card_047",
+      "card_143"
+    ],
+    "lastUpdated": "2026-10-14T11:39:04.2603395Z"
+  },
+  {
+    "username": "theshrekchurch",
+    "cardIds": [
+      "card_016",
+      "card_096",
+      "card_115"
+    ],
+    "lastUpdated": "2026-10-14T11:39:27.5935637Z"
+  },
+  {
+    "username": "schwabsitv",
+    "cardIds": [
+      "card_007",
+      "card_136",
+      "card_155"
+    ],
+    "lastUpdated": "2026-10-14T11:39:32.7711232Z"
   }
 ]

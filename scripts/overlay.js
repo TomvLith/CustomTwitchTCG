@@ -1,5 +1,3 @@
-const WS_URL = "ws://127.0.0.1:8080/";
-let socket;
 let masterCards = {};
 
 const overlayContainer = document.getElementById('overlay-container');
@@ -71,44 +69,21 @@ function createCardElement(cardData) {
     return cardEl;
 }
 
-function connectWebSocket() {
-    socket = new WebSocket(WS_URL);
+function initStreamerBotClient() {
+    const client = new StreamerbotClient({
+        host: '127.0.0.1',
+        port: 8080,
+        autoReconnect: true
+    });
 
-    socket.onopen = () => {
-        console.log("WebSocket connected!");
-    };
-
-    socket.onmessage = (event) => {
-        console.log("Raw WS Message Received:", event.data);
-
-        try {
-            let payload = JSON.parse(event.data);
-
-            while (typeof payload === 'string') {
-                payload = JSON.parse(payload);
-            }
-
-            if (payload.data) {
-                payload = payload.data;
-                while (typeof payload === 'string') {
-                    payload = JSON.parse(payload);
-                }
-            }
-
-            console.log("Parsed Payload Object:", payload);
-
-            if (payload && payload.event_type === "pack_opened") {
-                triggerPackOpening(payload.user, payload.cards);
-            }
-        } 
-        catch (err) {
-            console.error("Error parsing WS message:", err);
+    client.on("General.Custom", (data) => {
+        console.log("Received Custom Event Data:", data);
+        
+        const payload = data.data;
+        if (payload && payload.event_type === "pack_opened") {
+            triggerPackOpening(payload.user, payload.cards);
         }
-    };
-
-    socket.onclose = () => {
-        setTimeout(connectWebSocket, 3000);
-    };
+    });
 }
 
 function triggerPackOpening(username, cards) {
@@ -134,7 +109,6 @@ function triggerPackOpening(username, cards) {
         cards.forEach((card, index) => {
             const cardEl = createCardElement(card);
             
-            // Fixed clean syntax for transform math:
             cardEl.style.transform = `translateY(${index * 4}px) scale(${1 - (index * 0.02)})`;
             cardEl.style.zIndex = cards.length - index;
 
@@ -170,5 +144,5 @@ function startAutoSlideSequence(cardElements) {
 }
 
 loadMasterCards().then(() => {
-    connectWebSocket();
+    initStreamerBotClient();
 });
