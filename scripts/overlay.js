@@ -7,13 +7,11 @@ const userBadge = document.getElementById('username');
 const cardStage = document.getElementById('card-stage');
 const packGif = document.getElementById('pack-gif');
 
-// timing for animations
 const CARD_APPEAR_DELAY_MS = 2100;
 const GIF_DURATION_MS = 3000; 
 const CARD_DISPLAY_MS = 4500; 
 const SLIDE_ANIMATION_MS = 600; 
 
-// load the cards from your .JSON file
 async function loadMasterCards() {
     try {
         const response = await fetch('cards.json');
@@ -25,17 +23,15 @@ async function loadMasterCards() {
         });
     }
     catch (err) {
-        // silent catch
+        console.error("Error loading cards:", err);
     }
 }
 
-// replaces variables of card with actual info displayed on the card
 function createCardElement(cardData) {
     const formattedId = cardData.id.replace('card_', '#');
     const cardEl = document.createElement('div');
     cardEl.className = 'card';
 
-    // if it cant find a rarity assign common rarity to card
     let rawRarity = cardData.rarity;
     if (!rawRarity && masterCards[cardData.id]) {
         rawRarity = masterCards[cardData.id].rarity;
@@ -43,18 +39,15 @@ function createCardElement(cardData) {
 
     const rarityKey = rawRarity ? rawRarity.toLowerCase() : "common";
 
-    // full art logic
     if (rarityKey.startsWith("custom")) {
         cardEl.style.backgroundImage = `url('${cardData.image}')`;
         cardEl.style.backgroundSize = "100% 100%";
         cardEl.style.backgroundPosition = "center";
         cardEl.style.backgroundRepeat = "no-repeat";
-    
         cardEl.innerHTML = ''; 
         return cardEl; 
     }
 
-    // background card design for rarities
     const rarityMap = {
         "common": "images/cCard.png",
         "uncommon": "images/uCard.png",
@@ -69,61 +62,44 @@ function createCardElement(cardData) {
     cardEl.innerHTML = `
         <div class="card-dynamic-title">${cardData.name}</div>
         <div class="card-dynamic-image-container">
-        <img class="card-dynamic-image" src="${cardData.image}" alt="${cardData.name}" />
+            <img class="card-dynamic-image" src="${cardData.image}" alt="${cardData.name}" />
         </div>
         <div class="card-dynamic-desc">${cardData.description}</div>
         <div class="card-dynamic-id">${formattedId}</div>
     `;
 
-  return cardEl;
+    return cardEl;
 }
 
-// streamer.bot integration
 function connectWebSocket() {
     socket = new WebSocket(WS_URL);
 
     socket.onopen = () => {
-        const subscribeMsg = {
-            request: "Subscribe",
-            id: "tcg-overlay",
-            events: {
-                General: ["Custom"]
-            }
-        };
-        socket.send(JSON.stringify(subscribeMsg));
+        console.log("WebSocket connected!");
     };
 
     socket.onmessage = (event) => {
         console.log("Raw WS Message Received:", event.data);
 
         try {
-            let raw = JSON.parse(event.data);
-            let payload = raw;
+            let payload = JSON.parse(event.data);
 
-            // trigger overlay from streamer.bot
-            if (raw.data) {
-                payload = raw.data;
-            }
-
-            if (typeof payload === 'string') {
+            // Handle potential string wrapping
+            while (typeof payload === 'string') {
                 payload = JSON.parse(payload);
             }
 
-            if (payload.data && typeof payload.data === 'string') {
-                payload = JSON.parse(payload.data);
-            } else if (payload.data) {
+            if (payload.data) {
                 payload = payload.data;
+                while (typeof payload === 'string') {
+                    payload = JSON.parse(payload);
+                }
             }
 
             console.log("Parsed Payload Object:", payload);
 
-            //  make sure the action name is the same
-            if (payload && (payload.event_type === "pack_opened" || raw.event?.name === "pack_opened")) {
-                const username = payload.user || payload.data?.user || "Viewer";
-                const cards = payload.cards || payload.data?.cards || [];
-                
-                console.log("Triggering Pack Opening for:", username);
-                triggerPackOpening(username, cards);
+            if (payload && payload.event_type === "pack_opened") {
+                triggerPackOpening(payload.user, payload.cards);
             }
         } 
         catch (err) {
@@ -132,12 +108,10 @@ function connectWebSocket() {
     };
 
     socket.onclose = () => {
-        console.log("WebSocket connection closed. Retrying in 3s...");
         setTimeout(connectWebSocket, 3000);
     };
 }
 
-// actual pack opening event trigger
 function triggerPackOpening(username, cards) {
     userBadge.textContent = username;
  
@@ -160,6 +134,7 @@ function triggerPackOpening(username, cards) {
 
         cards.forEach((card, index) => {
             const cardEl = createCardElement(card);
+            
             cardEl.style.transform = `translateY(${index * 4}px) scale(${1 - (index * 0.02)})`;
             cardEl.style.zIndex = cards.length - index;
 
