@@ -25,7 +25,7 @@ async function loadMasterCards() {
         });
     }
     catch (err) {
-        // if it comes to here add a console.log to see whats happening
+        // silent catch
     }
 }
 
@@ -83,59 +83,67 @@ function connectWebSocket() {
     socket = new WebSocket(WS_URL);
 
     socket.onopen = () => {
-    
-    const subscribeMsg = {
-        request: "Subscribe",
-        id: "tcg-overlay",
-        events: {
-            General: ["Custom"]
-        }
+        const subscribeMsg = {
+            request: "Subscribe",
+            id: "tcg-overlay",
+            events: {
+                General: ["Custom"]
+            }
+        };
+        socket.send(JSON.stringify(subscribeMsg));
     };
-    socket.send(JSON.stringify(subscribeMsg));
-};
 
-socket.onmessage = (event) => {
-    console.log("Raw WS Message Received:", event.data);
+    socket.onmessage = (event) => {
+        console.log("Raw WS Message Received:", event.data);
 
-    try {
-        let payload = JSON.parse(event.data);
+        try {
+            let raw = JSON.parse(event.data);
+            let payload = raw;
 
-        while (typeof payload === 'string') {
-            payload = JSON.parse(payload);
-        }
+            // trigger overlay from streamer.bot
+            if (raw.data) {
+                payload = raw.data;
+            }
 
-        if (payload.data) {
-            payload = payload.data;
-            while (typeof payload === 'string') {
+            if (typeof payload === 'string') {
                 payload = JSON.parse(payload);
             }
+
+            if (payload.data && typeof payload.data === 'string') {
+                payload = JSON.parse(payload.data);
+            } else if (payload.data) {
+                payload = payload.data;
+            }
+
+            console.log("Parsed Payload Object:", payload);
+
+            //  make sure the action name is the same
+            if (payload && (payload.event_type === "pack_opened" || raw.event?.name === "pack_opened")) {
+                const username = payload.user || payload.data?.user || "Viewer";
+                const cards = payload.cards || payload.data?.cards || [];
+                
+                console.log("Triggering Pack Opening for:", username);
+                triggerPackOpening(username, cards);
+            }
+        } 
+        catch (err) {
+            console.error("Error parsing WS message:", err);
         }
+    };
 
-        console.log("Parsed Payload Object:", payload);
-
-        if (payload && payload.event_type === "pack_opened") {
-            console.log("Triggering Pack Opening directly for:", payload.user);
-            triggerPackOpening(payload.user, payload.cards);
-        }
-    } 
-    catch (err) {
-        console.error("Error parsing WS message:", err);
-    }
-};
-
-socket.onclose = () => {
-    console.log("WebSocket connection closed. Retrying in 3s...");
-    setTimeout(connectWebSocket, 3000);
+    socket.onclose = () => {
+        console.log("WebSocket connection closed. Retrying in 3s...");
+        setTimeout(connectWebSocket, 3000);
     };
 }
 
 // actual pack opening event trigger
 function triggerPackOpening(username, cards) {
     userBadge.textContent = username;
-  
+ 
     cardStage.style.display = 'none';
     cardStage.innerHTML = ''; 
-  
+ 
     overlayContainer.classList.add('active');
 
     packGif.src = `images/PackOpening.webp?t=${Date.now()}`;
@@ -152,8 +160,7 @@ function triggerPackOpening(username, cards) {
 
         cards.forEach((card, index) => {
             const cardEl = createCardElement(card);
-            
-            cardEl.style.transform = `translateY(${index * 4}px) scale(${1 - index * 0.02})`;
+            cardEl.style.transform = `translateY(${index * 4}px) scale(${1 - (index * 0.02)})`;
             cardEl.style.zIndex = cards.length - index;
 
             cardStage.appendChild(cardEl);
@@ -184,7 +191,9 @@ function startAutoSlideSequence(cardElements) {
         }
     }
 
-  showNextCard();
+    showNextCard();
 }
 
-connectWebSocket();
+loadMasterCards().then(() => {
+    connectWebSocket();
+});
