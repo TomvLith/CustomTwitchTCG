@@ -1290,5 +1290,12 @@
     "description": "",
     "image": "images/custom2.png",
     "rarity": "custom2"
+  },
+                  {
+    "id": "card_163",
+    "name": "Duck",
+    "description": "",
+    "image": "images/custom3.png",
+    "rarity": "custom3"
   }
 ]
